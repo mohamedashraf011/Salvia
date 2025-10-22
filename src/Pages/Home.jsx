@@ -73,9 +73,9 @@ function Home() {
       <div className="absolute bottom-5 left-5 z-30 flex items-center gap-3">
         <button
           onClick={toggleSidebar}
-          className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center cursor-pointer touch-manipulation"
+          className="w-12 h-12 rounded-full bg-gray-300/75 transition-colors flex items-center justify-center cursor-pointer touch-manipulation"
         >
-          <FaBars className="text-gray-500 text-2xl" />
+          <FaBars className="text-gray-600 text-2xl" />
         </button>
 
 

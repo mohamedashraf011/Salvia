@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 * {
-  font-family: "Just Me Again Down Here", cursive;
+  /* font-family: "Just Me Again Down Here", cursive;
   font-weight: 400;
-  font-style: normal;
+  font-style: normal; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
