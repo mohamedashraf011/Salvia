@@ -31,7 +31,7 @@ function About() {
           exporter of high-quality
           <br /> dried herbs and botanicals. With a strong base in Egypt, our
           operations extend across
-          <br /> some of the most fertile and diverse agricultural regions –
+          <br /> some of the most fertile and diverse agricultural regions -
           from the northern fields of
           <br /> Egypt to the rich and unique landscapes of central and southern
           Sudan. This wide

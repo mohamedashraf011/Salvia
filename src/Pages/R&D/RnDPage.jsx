@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import { motion as Motion } from "framer-motion";
 import { FaArrowDown } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // إضافة للـ navigation
+import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
 import backgroundImage from "../../assets/images/RD.png";
 
 const RnDPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const navigate = useNavigate(); // hook للـ navigation
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     console.log("Toggle clicked! State will be:", !isSidebarOpen);
@@ -19,8 +19,7 @@ const RnDPage = () => {
   const handleCloseSidebar = () => setIsSidebarOpen(false);
 
   const handleArrowClick = () => {
-    // غير '/next-page' للصفحة اللي عايز تروح عليها، مثلاً '/products' أو '/about'
-    navigate('/next-page'); // مثال: روح على صفحة تانية
+    navigate('/innovation');
   };
 
   return (
@@ -60,7 +59,7 @@ const RnDPage = () => {
             className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
-            onClick={handleArrowClick} // ربط الـ onClick بالـ navigation
+            onClick={handleArrowClick}
           >
             <div className="text-green-300 text-3xl cursor-pointer">
               <FaArrowDown />

@@ -4,9 +4,9 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
-import innovationImage from "../../assets/images/Innovation.png";
+import QualityAndSafetyResearchImage from "../../assets/images/Quality.png";
 
-const Innovation = () => {
+const Quality = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -19,9 +19,8 @@ const Innovation = () => {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleCloseSidebar = () => setIsSidebarOpen(false);
-  const handleUpArrowClick = () => navigate("/r-and-d");
-  const handleDownArrowClick = () => navigate("/product-development");
-
+  const handleUpArrowClick = () => navigate("/product-development");
+  const handleDownArrowClick = () => navigate("/packaging");
 
   return (
     <section className="relative flex flex-col min-h-screen overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white text-center">
@@ -57,15 +56,26 @@ const Innovation = () => {
             {/* Title and Text */}
             <div className="px-5 -translate-y-8 md:-translate-y-12 transition-all duration-500">
               <h1 className="text-4xl md:text-7xl font-extrabold leading-tight mb-8">
-                <span className="block">Innovation</span>
-                <span>in Agriculture</span>
+                Quality & Safety Research
               </h1>
+
               <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
-                We collaborate closely with farmers in Egypt and Sudan to
-                implement sustainable agricultural practices, introduce improved
-                cultivation methods, and optimize harvesting techniques. This
-                allows us to enhance crop quality while ensuring environmental
-                responsibility.
+                We invest in scientific research and laboratory testing to
+                monitor:
+              </p>
+
+              <ul className="list-disc list-inside text-gray-100 text-sm md:text-lg leading-relaxed mt-4 pl-6 md:pl-8 space-y-2">
+                <li>Pesticide residues</li>
+                <li>Heavy metals</li>
+                <li>Microbiology (pathogens, yeasts, and moulds)</li>
+                <li>Pyrrolizidine alkaloids (PAs)</li>
+                <li>Polycyclic aromatic hydrocarbons (PAHs)</li>
+                <li>Moisture control and stability</li>
+              </ul>
+
+              <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-8">
+                This ensures that all our products meet international standards
+                and continue to evolve with changing regulations.
               </p>
             </div>
           </div>
@@ -74,9 +84,9 @@ const Innovation = () => {
         {/* Right Column (Image) */}
         <div className="w-full lg:w-1/2 flex justify-center relative z-20">
           <img
-            src={innovationImage}
-            alt="Innovation in Agriculture"
-            className="w-[55%] md:w-[60%] lg:w-[65%] rounded-2xl shadow-2xl object-contain"
+            src={QualityAndSafetyResearchImage}
+            alt="Quality and Safety Research"
+            className="w-[55%] md:w-[40%] lg:w-[45%] rounded-2xl shadow-2xl object-contain"
           />
         </div>
       </div>
@@ -89,4 +99,4 @@ const Innovation = () => {
   );
 };
 
-export default Innovation;
+export default Quality;

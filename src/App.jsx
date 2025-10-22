@@ -11,6 +11,10 @@ import Product from "./Pages/Product/Products";
 import OurQuality from "./Pages/OurQuality";
 import RnDPage from "./Pages/R&D/RnDPage";
 import Innovation from "./Pages/R&D/Innovation";
+import ProductDevelopment from "./Pages/R&D/ProductDevelopment";
+import Quality from "./Pages/R&D/Quality";
+import Packaging from "./Pages/R&D/Packaging";
+import Commitment from "./Pages/R&D/Commitment";
 
 
 
@@ -28,6 +32,10 @@ function App() {
           <Route path="/our-quality" element={<OurQuality />} />
           <Route path="/r-and-d" element={<RnDPage />} />
           <Route path="/innovation" element={<Innovation />} />
+          <Route path="/product-development" element={<ProductDevelopment />} />
+          <Route path="/quality" element={<Quality />} />
+          <Route path="/packaging" element={<Packaging />} />
+          <Route path="/commitment" element={<Commitment />} />
         </Routes>
       </Router>
     </>

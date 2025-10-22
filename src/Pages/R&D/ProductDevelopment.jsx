@@ -4,9 +4,9 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
-import innovationImage from "../../assets/images/Innovation.png";
+import productDevelopmentImage from "../../assets/images/ProductDevelopment.png";
 
-const Innovation = () => {
+const ProductDevelopment = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -19,9 +19,8 @@ const Innovation = () => {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleCloseSidebar = () => setIsSidebarOpen(false);
-  const handleUpArrowClick = () => navigate("/r-and-d");
-  const handleDownArrowClick = () => navigate("/product-development");
-
+  const handleUpArrowClick = () => navigate("/innovation");
+  const handleDownArrowClick = () => navigate("/quality");
 
   return (
     <section className="relative flex flex-col min-h-screen overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white text-center">
@@ -57,15 +56,13 @@ const Innovation = () => {
             {/* Title and Text */}
             <div className="px-5 -translate-y-8 md:-translate-y-12 transition-all duration-500">
               <h1 className="text-4xl md:text-7xl font-extrabold leading-tight mb-8">
-                <span className="block">Innovation</span>
-                <span>in Agriculture</span>
+                Product Development
               </h1>
               <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
-                We collaborate closely with farmers in Egypt and Sudan to
-                implement sustainable agricultural practices, introduce improved
-                cultivation methods, and optimize harvesting techniques. This
-                allows us to enhance crop quality while ensuring environmental
-                responsibility.
+                Our R&D team works on developing new herbal products tailored to
+                the needs of the food, beverage, and wellness industries. By
+                studying global market trends and customer requirements, we
+                create solutions that balance tradition with modern applications.
               </p>
             </div>
           </div>
@@ -74,9 +71,9 @@ const Innovation = () => {
         {/* Right Column (Image) */}
         <div className="w-full lg:w-1/2 flex justify-center relative z-20">
           <img
-            src={innovationImage}
-            alt="Innovation in Agriculture"
-            className="w-[55%] md:w-[60%] lg:w-[65%] rounded-2xl shadow-2xl object-contain"
+            src={productDevelopmentImage}
+            alt="Product Development"
+            className="w-[55%] md:w-[40%] lg:w-[50%] rounded-2xl shadow-2xl object-contain"
           />
         </div>
       </div>
@@ -89,4 +86,4 @@ const Innovation = () => {
   );
 };
 
-export default Innovation;
+export default ProductDevelopment;

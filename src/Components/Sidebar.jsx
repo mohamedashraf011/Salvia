@@ -12,12 +12,12 @@ function Sidebar({ isOpen, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[1px]"
+      className="fixed inset-0 z-[10000] bg-black/30 backdrop-blur-[1px]"
       onClick={onClose}
     >
       <div
         className="absolute top-0 left-0 h-full w-[260px] 
-        bg-[#293B23F2]/95 backdrop-blur-md text-white z-50 
+        bg-[#293B23F2]/95 backdrop-blur-md text-white z-[10001] 
         rounded-tr-[150px] shadow-xl transform transition-transform duration-500"
         onClick={(e) => e.stopPropagation()}
       >
