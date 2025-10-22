@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import tree from "../../assets/images/tree.png";
 import { FaArrowDown } from "react-icons/fa";
 import Footer from "../../Components/Footer";
@@ -27,7 +27,6 @@ function About() {
           About Us
         </h1>
         <p className="max-w-3xl text-base md:text-lg text-gray-100 leading-relaxed mb-8">
-          {" "}
           At Salvia Naturals, we take pride in being a trusted supplier and
           exporter of high-quality
           <br /> dried herbs and botanicals. With a strong base in Egypt, our
@@ -40,13 +39,14 @@ function About() {
           herbs with distinctive
           <br /> qualities, reflecting the natural richness of the Nile Valley.
         </p>
-        <motion.div
+
+        <Motion.div
           className="text-[#CEFFCE] text-3xl cursor-pointer"
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
         >
           <FaArrowDown />
-        </motion.div>
+        </Motion.div>
       </div>
 
       <Footer
