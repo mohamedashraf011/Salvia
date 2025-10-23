@@ -8,7 +8,7 @@ import Mission from "./Pages/About Us/Mission";
 import Footer from "./Components/Footer";
 import Community from "./Pages/About Us/Community";
 import Product from "./Pages/Product/Products";
-import OurQuality from "./Pages/OurQuality";
+import OurQuality from "./Pages/Our Quality Commitment/OurQuality";
 import RnDPage from "./Pages/R&D/RnDPage";
 import Innovation from "./Pages/R&D/Innovation";
 import ProductDevelopment from "./Pages/R&D/ProductDevelopment";
@@ -19,8 +19,6 @@ import Gallary from "./Pages/Gallary/Gallary";
 import Certificates from "./Pages/Certificates/Certificates";
 import Page9 from "./Pages/Page9/Page9";
 import Page10 from "./Pages/Page10/Page10";
-
-
 
 function App() {
   return (

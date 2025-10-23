@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import tree from "../assets/images/tree.png";
-import Footer from "../Components/Footer";
-import Sidebar from "../Components/Sidebar";
+import tree from "../../assets/images/tree.png";
+import Footer from "../../Components/Footer";
+import Sidebar from "../../Components/Sidebar";
 import { FaLeaf, FaFlask, FaBoxOpen, FaSyncAlt } from "react-icons/fa";
 import { GiChemicalDrop } from "react-icons/gi";
 import { BiDroplet } from "react-icons/bi";
@@ -48,7 +48,9 @@ const OurQuality = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <FaLeaf className="text-green-300 text-2xl" />
-              <h3 className="text-xl font-semibold">Food Safety & Compliance</h3>
+              <h3 className="text-xl font-semibold">
+                Food Safety & Compliance
+              </h3>
             </div>
             <p className="text-gray-100 leading-relaxed">
               We follow strict food safety management practices to guarantee
@@ -144,16 +146,15 @@ const OurQuality = () => {
             </p>
           </div>
         </div>
-
       </div>
 
       {/* Footer Text */}
-        <div>
-          <p className="text-center text-xl font-semibold text-gray-100 leading-relaxed">
-            At Salvia Naturals, we are not only delivering herbs — we are
-            delivering trust, safety, and excellence with every shipment.
-          </p>
-        </div>
+      <div>
+        <p className="text-center text-xl font-semibold text-gray-100 leading-relaxed">
+          At Salvia Naturals, we are not only delivering herbs — we are
+          delivering trust, safety, and excellence with every shipment.
+        </p>
+      </div>
 
       {/* Footer */}
       <Footer toggleSidebar={toggleSidebar} />
