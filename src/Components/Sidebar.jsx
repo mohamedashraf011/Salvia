@@ -89,15 +89,6 @@ function Sidebar({ isOpen, onClose }) {
             </li>
             <li>
               <Link 
-                to="/sitemap" 
-                className="hover:text-gray-300 cursor-pointer block" 
-                onClick={onClose}
-              >
-                Site Map
-              </Link>
-            </li>
-            <li>
-              <Link 
                 to="/page9" 
                 className="hover:text-gray-300 cursor-pointer block" 
                 onClick={onClose}
