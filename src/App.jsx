@@ -15,6 +15,8 @@ import ProductDevelopment from "./Pages/R&D/ProductDevelopment";
 import Quality from "./Pages/R&D/Quality";
 import Packaging from "./Pages/R&D/Packaging";
 import Commitment from "./Pages/R&D/Commitment";
+import Gallary from "./Pages/Gallary/Gallary";
+import Certificates from "./Pages/Certificates/Certificates";
 
 
 
@@ -36,6 +38,8 @@ function App() {
           <Route path="/quality" element={<Quality />} />
           <Route path="/packaging" element={<Packaging />} />
           <Route path="/commitment" element={<Commitment />} />
+          <Route path="/gallary" element={<Gallary />} />
+          <Route path="/certificates" element={<Certificates />} />
         </Routes>
       </Router>
     </>
