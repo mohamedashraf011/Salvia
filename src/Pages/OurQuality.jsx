@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import tree from "../assets/images/tree.png";
 import Footer from "../Components/Footer";
+import Sidebar from "../Components/Sidebar";
 import { FaLeaf, FaFlask, FaBoxOpen, FaSyncAlt } from "react-icons/fa";
 import { GiChemicalDrop } from "react-icons/gi";
 import { BiDroplet } from "react-icons/bi";
 import { MdOutlineBiotech } from "react-icons/md";
 
 const OurQuality = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    console.log("Toggle clicked! State will be:", !isSidebarOpen);
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleCloseSidebar = () => setIsSidebarOpen(false);
+
   return (
     <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D]">
       {/* Tree Image */}
@@ -146,7 +156,8 @@ const OurQuality = () => {
         </div>
 
       {/* Footer */}
-      <Footer />
+      <Footer toggleSidebar={toggleSidebar} />
+      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
     </div>
   );
 };

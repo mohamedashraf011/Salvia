@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaSearch, FaSeedling, FaLeaf } from "react-icons/fa";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
@@ -22,10 +22,17 @@ const products = [
 ];
 
 function Products() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    console.log("Toggle clicked! State will be:", !isSidebarOpen);
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleCloseSidebar = () => setIsSidebarOpen(false);
+
   return (
     <div className="relative min-h-screen bg-gradient-to-l from-[#9F9F9D] to-[#4E6347] flex flex-col overflow-x-hidden">
-      {/* <Sidebar /> */}
-
       {/* صورة الأوراق */}
       <img
         src={leavesRight}
@@ -34,7 +41,7 @@ function Products() {
       />
 
       {/* المحتوى */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-20 pb-32 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-20 pb-32 relative z-10 flex-1">
         {/* العنوان */}
         <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-md mb-20">
           Our Products
@@ -86,8 +93,8 @@ function Products() {
       </div>
 
       {/* الفوتر */}
-      <Footer />
-      
+      <Footer toggleSidebar={toggleSidebar} />
+      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
     </div>
   );
 }
