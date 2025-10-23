@@ -5,6 +5,7 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import logoImage from "../assets/images/logo.png";
 
 function Sidebar({ isOpen, onClose }) {
@@ -23,18 +24,96 @@ function Sidebar({ isOpen, onClose }) {
       >
         <div className="flex flex-col justify-between h-full px-8 py-10">
           <ul className="flex flex-col gap-4 mt-10 text-xl font-light">
-            <li className="hover:text-gray-300 cursor-pointer">About Us</li>
-            <li className="hover:text-gray-300 cursor-pointer">Products</li>
-            <li className="hover:text-gray-300 cursor-pointer">
-              Our Quality Commitment
+            <li>
+              <Link 
+                to="/about" 
+                className="hover:text-gray-300 cursor-pointer block" 
+                onClick={onClose}
+              >
+                About Us
+              </Link>
             </li>
-            <li className="hover:text-gray-300 cursor-pointer">R&D</li>
-            <li className="hover:text-gray-300 cursor-pointer">Gallery</li>
-            <li className="hover:text-gray-300 cursor-pointer">Events</li>
-            <li className="hover:text-gray-300 cursor-pointer">Contact Us</li>
-            <li className="hover:text-gray-300 cursor-pointer">Site Map</li>
-            <li className="hover:text-gray-300 cursor-pointer">Page 9</li>
-            <li className="hover:text-gray-300 cursor-pointer mb-10">Page 10</li>
+            <li>
+              <Link 
+                to="/product" 
+                className="hover:text-gray-300 cursor-pointer block" 
+                onClick={onClose}
+              >
+                Products
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/our-quality" 
+                className="hover:text-gray-300 cursor-pointer block" 
+                onClick={onClose}
+              >
+                Our Quality Commitment
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/r-and-d" 
+                className="hover:text-gray-300 cursor-pointer block" 
+                onClick={onClose}
+              >
+                R&D
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/gallary" 
+                className="hover:text-gray-300 cursor-pointer block" 
+                onClick={onClose}
+              >
+                Gallery
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/events" 
+                className="hover:text-gray-300 cursor-pointer block" 
+                onClick={onClose}
+              >
+                Events
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/contact" 
+                className="hover:text-gray-300 cursor-pointer block" 
+                onClick={onClose}
+              >
+                Contact Us
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/sitemap" 
+                className="hover:text-gray-300 cursor-pointer block" 
+                onClick={onClose}
+              >
+                Site Map
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/page9" 
+                className="hover:text-gray-300 cursor-pointer block" 
+                onClick={onClose}
+              >
+                Page 9
+              </Link>
+            </li>
+            <li className="mb-10">
+              <Link 
+                to="/page10" 
+                className="hover:text-gray-300 cursor-pointer block" 
+                onClick={onClose}
+              >
+                Page 10
+              </Link>
+            </li>
           </ul>
 
           <div className="flex flex-col gap-5">

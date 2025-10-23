@@ -17,6 +17,8 @@ import Packaging from "./Pages/R&D/Packaging";
 import Commitment from "./Pages/R&D/Commitment";
 import Gallary from "./Pages/Gallary/Gallary";
 import Certificates from "./Pages/Certificates/Certificates";
+import Page9 from "./Pages/Page9/Page9";
+import Page10 from "./Pages/Page10/Page10";
 
 
 
@@ -40,6 +42,8 @@ function App() {
           <Route path="/commitment" element={<Commitment />} />
           <Route path="/gallary" element={<Gallary />} />
           <Route path="/certificates" element={<Certificates />} />
+          <Route path="/page9" element={<Page9 />} />
+          <Route path="/page10" element={<Page10 />} />
         </Routes>
       </Router>
     </>
