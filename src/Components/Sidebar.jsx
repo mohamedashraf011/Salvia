@@ -89,6 +89,15 @@ function Sidebar({ isOpen, onClose }) {
             </li>
             <li>
               <Link 
+                to="/certificates" 
+                className="hover:text-gray-300 cursor-pointer block font-bold" 
+                onClick={onClose}
+              >
+                Certificates
+              </Link>
+            </li>
+            <li>
+              <Link 
                 to="/page9" 
                 className="hover:text-gray-300 cursor-pointer block font-bold" 
                 onClick={onClose}

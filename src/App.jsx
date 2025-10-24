@@ -34,7 +34,6 @@ function App() {
           <Route path="/mission" element={<Mission />} />
           <Route path="/community" element={<Community />} />
           <Route path="/product" element={<Product />} />
-          {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
           <Route path="/product-details/:title" element={<ProductDetails />} />
           <Route path="/our-quality" element={<OurQuality />} />
           <Route path="/r-and-d" element={<RnDPage />} />

@@ -21,132 +21,155 @@ function Certificates() {
         alt="Top Right Image"
         className="absolute top-0 right-0 w-40 md:w-55 opacity-90"
       />
-      
-      <div className="flex flex-col flex-1 px-4 gap-6 overflow-y-auto items-center pb-32">
-        <h1 className="text-5xl font-bold mb-8 text-center flex-shrink-0">
-          Certificates
-        </h1>
 
+      <div className="flex flex-col flex-1 px-4 gap-6 mt-8 overflow-y-auto">
+        <div className="max-w-6xl ml-65">
+          <h1 className="text-5xl font-bold mb-4 text-left flex-shrink-0">
+            Certificates
+          </h1>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl flex-1 overflow-y-auto pb-0 mx-auto scrollbar-hide relative z-10">
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}
               alt="ISO Certificate"
               className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
             />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}
               alt="ISO Certificate"
               className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
             />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}
               alt="ISO Certificate"
               className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
             />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}
               alt="ISO Certificate"
               className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
             />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}
               alt="ISO Certificate"
               className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
             />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
-          </div>
-          
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
-            <img
-              src={Certificate}
-              alt="ISO Certificate"
-              className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
-            />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}
               alt="ISO Certificate"
               className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
             />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}
               alt="ISO Certificate"
               className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
             />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}
               alt="ISO Certificate"
               className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
             />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}
               alt="ISO Certificate"
               className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
             />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 text-center overflow-visible">
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}
               alt="ISO Certificate"
               className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
             />
-            <p className="text-gray-600 mb-1">Certification body</p>
-            <p className="text-gray-600">Certificate no</p>
-            <p className="text-gray-600">Expiry date no</p>
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
+            <img
+              src={Certificate}
+              alt="ISO Certificate"
+              className="mx-auto mb-4 w-auto h-auto max-h-[60%] object-contain"
+            />
+            <div className="w-full pl-4">
+              <p className="text-gray-700 mb-1">Certification body</p>
+              <p className="text-gray-700">Certificate no</p>
+              <p className="text-gray-700">Expiry date no</p>
+            </div>
           </div>
         </div>
       </div>
