@@ -25,16 +25,12 @@ const Innovation = () => {
 
   return (
     <section className="relative flex flex-col min-h-screen overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white text-center">
-      {/* Sidebar */}
       <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
 
-      {/* Main Content */}
       <div className="flex flex-col lg:flex-row items-center justify-center px-4 gap-6 flex-grow relative z-10 h-screen">
-        {/* Left Column */}
         <div className="flex flex-col items-start justify-center w-full lg:w-1/2 gap-6 text-left">
           <div className="flex items-center gap-4">
-            {/* Arrows on the left side */}
-            <div className="flex flex-col items-center gap-6 mx-6">
+            <div className="flex flex-col items-center gap-6 mx-3">
               <Motion.div
                 className="text-green-300 text-3xl cursor-pointer"
                 animate={{ y: [0, -10, 0] }}
@@ -54,9 +50,8 @@ const Innovation = () => {
               </Motion.div>
             </div>
 
-            {/* Title and Text */}
-            <div className="px-5 -translate-y-8 md:-translate-y-12 transition-all duration-500">
-              <h1 className="text-4xl md:text-7xl font-extrabold leading-tight mb-8">
+            <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500">
+              <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
                 <span className="block">Innovation</span>
                 <span>in Agriculture</span>
               </h1>
@@ -71,7 +66,6 @@ const Innovation = () => {
           </div>
         </div>
 
-        {/* Right Column (Image) */}
         <div className="w-full lg:w-1/2 flex justify-center relative z-20">
           <img
             src={innovationImage}
@@ -81,7 +75,6 @@ const Innovation = () => {
         </div>
       </div>
 
-      {/* Footer */}
       <div className="fixed bottom-0 left-0 w-full z-[9999]">
         <Footer toggleSidebar={toggleSidebar} />
       </div>

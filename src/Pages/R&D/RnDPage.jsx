@@ -1,4 +1,3 @@
-// src/pages/R&D/index.jsx
 import React, { useState } from 'react';
 import { motion as Motion } from "framer-motion";
 import { FaArrowDown } from "react-icons/fa";
@@ -24,26 +23,21 @@ const RnDPage = () => {
 
   return (
     <div className="relative min-h-screen bg-gray-50">
-      {/* Background Image with Dark Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
         style={{
           backgroundImage: `url(${backgroundImage})`,
         }}
       >
-        {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black opacity-60"></div>
       </div>
 
-      {/* Sidebar */}
       <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
 
-      {/* Main Content */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Hero Section with Text Overlay */}
         <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-6 text-center text-white relative">
           <div className="max-w-5xl mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-            <h1 className="text-4xl md:text-6xl font-bold mb-12 md:mb-20 drop-shadow-lg">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 md:mb-8 drop-shadow-lg">
               <span className="text-green-300">Research</span> & <span className="text-green-300">Development</span>
             </h1>
             <p className="text-base md:text-lg leading-relaxed drop-shadow-md">
@@ -61,7 +55,7 @@ const RnDPage = () => {
             transition={{ repeat: Infinity, duration: 1.5 }}
             onClick={handleArrowClick}
           >
-            <div className="text-green-300 text-3xl cursor-pointer">
+            <div className="text-green-300 text-4xl cursor-pointer">
               <FaArrowDown />
             </div>
           </Motion.div>
