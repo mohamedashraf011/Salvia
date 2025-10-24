@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion as Motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import tree from "../../assets/images/tree.png";
 import { FaArrowDown } from "react-icons/fa";
 import Footer from "../../Components/Footer";
@@ -7,6 +8,7 @@ import Sidebar from "../../Components/Sidebar";
 
 function About() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     console.log("Toggle clicked! State will be:", !isSidebarOpen);
@@ -15,8 +17,12 @@ function About() {
 
   const handleCloseSidebar = () => setIsSidebarOpen(false);
 
+  const handleArrowClick = () => {
+    navigate("/mission");
+  };
+
   return (
-    <section className="relative flex flex-col min-h-screen bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white text-center">
+    <section className="relative flex flex-col h-screen overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white text-center">
       <div className="flex-1 flex flex-col items-center justify-center px-4 gap-6">
         <img
           src={tree}
@@ -29,7 +35,7 @@ function About() {
         <p className="max-w-3xl text-base md:text-lg text-gray-100 leading-relaxed mb-8">
           At Salvia Naturals, we take pride in being a trusted supplier and
           exporter of high-quality
-          <br /> dried herbs and botanicals. With a strong base in Egypt, our
+          <br /> dried herbs and Botanicals. With a strong base in Egypt, our
           operations extend across
           <br /> some of the most fertile and diverse agricultural regions -
           from the northern fields of
@@ -44,6 +50,7 @@ function About() {
           className="text-[#CEFFCE] text-3xl cursor-pointer"
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
+          onClick={handleArrowClick}
         >
           <FaArrowDown />
         </Motion.div>
