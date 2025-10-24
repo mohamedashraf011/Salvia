@@ -8,7 +8,6 @@ import Gallary4 from "../../assets/images/Gallary4.png";
 // import sampleVideo from "../../assets/videos/sample.mp4";
 import tree from "../../assets/images/tree.png";
 
-
 function Gallery() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -27,10 +26,12 @@ function Gallery() {
         className="absolute top-0 right-0 w-40 md:w-55 opacity-90"
       />
       
-      <div className="flex flex-col flex-1 px-4 gap-6 overflow-hidden items-center">
-        <h1 className="text-5xl font-bold  mb-8 text-center flex-shrink-0">
-          Gallery
-        </h1>
+      <div className="flex flex-col flex-1 px-4 gap-6 overflow-hidden">
+        <div className="max-w-6xl ml-45">
+          <h1 className="text-5xl font-bold mb-4 mt-4 text-left flex-shrink-0">
+            Gallery
+          </h1>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl flex-1 overflow-y-auto pb-4 mx-auto scrollbar-hide">
           <div className="relative bg-white rounded-lg shadow-lg">
