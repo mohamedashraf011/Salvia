@@ -22,8 +22,8 @@ function Sidebar({ isOpen, onClose }) {
         rounded-tr-[150px] shadow-xl transform transition-transform duration-500"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex flex-col justify-between h-full px-8 py-2 text-left">
-          <ul className="flex flex-col gap-6 mt-10 text-xl font-light">
+        <div className="flex flex-col justify-between h-full px-8 py-3 text-left">
+          <ul className="flex flex-col gap-5 mt-10 text-xl font-light">
             <li>
               <Link 
                 to="/about" 
@@ -116,7 +116,7 @@ function Sidebar({ isOpen, onClose }) {
             </li>
           </ul>
 
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col">
             <div className="flex gap-5 text-lg justify-center">
               <FaYoutube className="hover:text-gray-300 cursor-pointer" />
               <FaFacebookF className="hover:text-gray-300 cursor-pointer" />
