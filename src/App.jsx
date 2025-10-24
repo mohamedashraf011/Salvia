@@ -8,6 +8,7 @@ import Mission from "./Pages/About Us/Mission";
 import Footer from "./Components/Footer";
 import Community from "./Pages/About Us/Community";
 import Product from "./Pages/Product/Products";
+import ProductDetails from "./Pages/Product/ProductDetails";
 import OurQuality from "./Pages/Our Quality Commitment/OurQuality";
 import RnDPage from "./Pages/R&D/RnDPage";
 import Innovation from "./Pages/R&D/Innovation";
@@ -20,6 +21,8 @@ import Certificates from "./Pages/Certificates/Certificates";
 import Page9 from "./Pages/Page9/Page9";
 import Page10 from "./Pages/Page10/Page10";
 
+
+
 function App() {
   return (
     <>
@@ -31,6 +34,8 @@ function App() {
           <Route path="/mission" element={<Mission />} />
           <Route path="/community" element={<Community />} />
           <Route path="/product" element={<Product />} />
+          {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
+          <Route path="/product-details/:title" element={<ProductDetails />} />
           <Route path="/our-quality" element={<OurQuality />} />
           <Route path="/r-and-d" element={<RnDPage />} />
           <Route path="/innovation" element={<Innovation />} />
