@@ -22,12 +22,12 @@ function Sidebar({ isOpen, onClose }) {
         rounded-tr-[150px] shadow-xl transform transition-transform duration-500"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex flex-col justify-between h-full px-8 py-10">
-          <ul className="flex flex-col gap-4 mt-10 text-xl font-light">
+        <div className="flex flex-col justify-between h-full px-8 py-2">
+          <ul className="flex flex-col gap-6 mt-10 text-xl font-light">
             <li>
               <Link 
                 to="/about" 
-                className="hover:text-gray-300 cursor-pointer block" 
+                className="hover:text-gray-300 cursor-pointer block font-bold" 
                 onClick={onClose}
               >
                 About Us
@@ -36,7 +36,7 @@ function Sidebar({ isOpen, onClose }) {
             <li>
               <Link 
                 to="/product" 
-                className="hover:text-gray-300 cursor-pointer block" 
+                className="hover:text-gray-300 cursor-pointer block font-bold" 
                 onClick={onClose}
               >
                 Products
@@ -45,7 +45,7 @@ function Sidebar({ isOpen, onClose }) {
             <li>
               <Link 
                 to="/our-quality" 
-                className="hover:text-gray-300 cursor-pointer block" 
+                className="hover:text-gray-300 cursor-pointer block font-bold" 
                 onClick={onClose}
               >
                 Our Quality Commitment
@@ -54,7 +54,7 @@ function Sidebar({ isOpen, onClose }) {
             <li>
               <Link 
                 to="/r-and-d" 
-                className="hover:text-gray-300 cursor-pointer block" 
+                className="hover:text-gray-300 cursor-pointer block font-bold" 
                 onClick={onClose}
               >
                 R&D
@@ -63,7 +63,7 @@ function Sidebar({ isOpen, onClose }) {
             <li>
               <Link 
                 to="/gallary" 
-                className="hover:text-gray-300 cursor-pointer block" 
+                className="hover:text-gray-300 cursor-pointer block font-bold" 
                 onClick={onClose}
               >
                 Gallery
@@ -72,7 +72,7 @@ function Sidebar({ isOpen, onClose }) {
             <li>
               <Link 
                 to="/events" 
-                className="hover:text-gray-300 cursor-pointer block" 
+                className="hover:text-gray-300 cursor-pointer block font-bold" 
                 onClick={onClose}
               >
                 Events
@@ -81,7 +81,7 @@ function Sidebar({ isOpen, onClose }) {
             <li>
               <Link 
                 to="/contact" 
-                className="hover:text-gray-300 cursor-pointer block" 
+                className="hover:text-gray-300 cursor-pointer block font-bold" 
                 onClick={onClose}
               >
                 Contact Us
@@ -90,7 +90,7 @@ function Sidebar({ isOpen, onClose }) {
             <li>
               <Link 
                 to="/page9" 
-                className="hover:text-gray-300 cursor-pointer block" 
+                className="hover:text-gray-300 cursor-pointer block font-bold" 
                 onClick={onClose}
               >
                 Page 9
@@ -99,7 +99,7 @@ function Sidebar({ isOpen, onClose }) {
             <li className="mb-10">
               <Link 
                 to="/page10" 
-                className="hover:text-gray-300 cursor-pointer block" 
+                className="hover:text-gray-300 cursor-pointer block font-bold" 
                 onClick={onClose}
               >
                 Page 10
