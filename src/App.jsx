@@ -20,6 +20,7 @@ import Gallary from "./Pages/Gallary/Gallary";
 import Events from "./Pages/Events/Events";
 import EventDetail from "./Pages/Events/EventDetail";
 import EventInformation from "./Pages/Events/EventInformation";
+import Contact from "./Pages/Contact US/Contact";
 import Certificates from "./Pages/Certificates/Certificates";
 import Page9 from "./Pages/Page9/Page9";
 import Page10 from "./Pages/Page10/Page10";
@@ -49,6 +50,7 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/event/:id" element={<EventDetail />} />
           <Route path="/event-information" element={<EventInformation />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/page9" element={<Page9 />} />
           <Route path="/page10" element={<Page10 />} />
