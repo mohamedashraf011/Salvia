@@ -4,7 +4,7 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
-import innovationImage from "../../assets/images/Innovation.png";
+import innovationImage from "../../assets/images/innovation.png";
 
 const Innovation = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
