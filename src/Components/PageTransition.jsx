@@ -35,7 +35,7 @@ function PageTransition({ children, pageKey }) {
         width: "100%", 
         height: "100%",
         position: "relative",
-        backgroundColor: "red",
+        backgroundColor: "transparent",
         willChange: "transform, opacity",
         overflow: "hidden",
       }}
