@@ -41,7 +41,6 @@ function Certificates() {
               <p className="text-gray-700">Expiry date no</p>
             </div>
           </div>
-
           <div className="bg-white rounded-lg shadow-lg aspect-square flex flex-col justify-center items-center p-4 overflow-visible">
             <img
               src={Certificate}

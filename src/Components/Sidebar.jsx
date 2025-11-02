@@ -126,11 +126,13 @@ function Sidebar({ isOpen, onClose }) {
             </div>
 
             <div className="flex justify-center">
+            <Link to="/">
               <img
                 src={logoImage}
                 alt="Salvia Naturals Logo"
                 className="w-auto h-auto object-contain"
               />
+            </Link>
             </div>
           </div>
         </div>
