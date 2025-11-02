@@ -1,5 +1,4 @@
 import "./App.css";
-// import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./Pages/Home";
 import Sidebar from "./Components/Sidebar";
@@ -7,6 +6,8 @@ import About from "./Pages/About Us/About";
 import Mission from "./Pages/About Us/Mission";
 import Footer from "./Components/Footer";
 import Community from "./Pages/About Us/Community";
+import Reputation from "./Pages/About Us/Reputation";
+import Vision from "./Pages/About Us/Vision";
 import Product from "./Pages/Product/Products";
 import ProductDetails from "./Pages/Product/ProductDetails";
 import OurQuality from "./Pages/Our Quality Commitment/OurQuality";
@@ -27,6 +28,7 @@ import Page10 from "./Pages/Page10/Page10";
 
 
 
+
 function App() {
   return (
     <>
@@ -37,6 +39,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/mission" element={<Mission />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/reputation" element={<Reputation />} />
+          <Route path="/vision" element={<Vision />} />
           <Route path="/product" element={<Product />} />
           <Route path="/product-details/:title" element={<ProductDetails />} />
           <Route path="/our-quality" element={<OurQuality />} />

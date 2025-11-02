@@ -46,7 +46,7 @@ const EventDetail = () => {
             </div>
 
             <Motion.div
-              className="mt-4 text-[#CEFFCE] text-4xl cursor-pointer"
+              className="mt-4 text-[#CEFFCE] text-4xl cursor-pointer z-[9999]"
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, duration: 1.5 }}
               onClick={handleArrowClick}
@@ -65,7 +65,7 @@ const EventDetail = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 w-full z-[9999]">
+      <div className="fixed bottom-0 left-0 w-full z-[999]">
         <Footer toggleSidebar={toggleSidebar} />
       </div>
     </section>

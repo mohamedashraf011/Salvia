@@ -32,7 +32,7 @@ function About() {
         <h1 className="text-5xl md:text-9xl font-extrabold text-green-400 mt-12">
           About Us
         </h1>
-        <p className="max-w-3xl text-base md:text-lg text-gray-100 leading-relaxed mb-8">
+        <p className="max-w-3xl text-base md:text-lg text-gray-100 leading-relaxed">
           At Salvia Naturals, we take pride in being a trusted supplier and
           exporter of high-quality
           <br /> dried herbs and Botanicals. With a strong base in Egypt, our
@@ -47,7 +47,7 @@ function About() {
         </p>
 
         <Motion.div
-          className="text-[#CEFFCE] text-3xl cursor-pointer"
+          className="text-green-300 text-4xl cursor-pointer"
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
           onClick={handleArrowClick}

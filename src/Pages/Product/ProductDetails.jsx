@@ -44,7 +44,7 @@ function ProductDetails() {
       <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
 
       <div className="flex-1 flex flex-col justify-between">
-        <div className="flex flex-col lg:flex-row justify-between items-center px-6 lg:px-30 pt-12 gap-10">
+        <div className="flex flex-col lg:flex-row justify-between items-center px-8 lg:px-36 pt-12">
           <div className="text-white w-full lg:w-1/2 space-y-5">
             <h1 className="text-4xl lg:text-5xl font-bold uppercase">
               {product.title}

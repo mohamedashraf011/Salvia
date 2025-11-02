@@ -4,10 +4,10 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
-import communityImg from "../../assets/images/community.png";
+import ReputationImg from "../../assets/images/reputation.png";
 import leavesRight from "../../assets/images/tree.png";
 
-const Community = () => {
+const Reputation = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -20,8 +20,8 @@ const Community = () => {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleCloseSidebar = () => setIsSidebarOpen(false);
-  const handleUpArrowClick = () => navigate("/mission");
-  const handleDownArrowClick = () => navigate("/reputation");
+  const handleUpArrowClick = () => navigate("/community");
+  const handleDownArrowClick = () => navigate("/vision");
 
   return (
     <section className="relative flex flex-col min-h-screen overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white text-center">
@@ -58,15 +58,15 @@ const Community = () => {
 
             <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500">
               <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
-                <span className="block">Sustainability</span>
-                <span>& Community</span>
+                <span className="block">Our</span>
+                <span>Reputation</span>
               </h1>
               <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
-                We work closely with farmers and local communities, ensuring
-                sustainable sourcing practices and supporting agricultural
-                development in the region. By maintaining strong relationships
-                throughout our supply chain, we are able to guarantee both
-                traceability and reliability for our customers.
+                With years of experience in the field, Salvia Naturals has built
+                a reputation for professionalism, transparency, and excellence.
+                We are proud to serve clients across the globe in the food,
+                beverage, health, and wellness industries, offering them natural
+                herbs that meet their specific requirements.
               </p>
             </div>
           </div>
@@ -74,9 +74,9 @@ const Community = () => {
 
         <div className="w-full lg:w-1/2 flex justify-center relative z-20">
           <img
-            src={communityImg}
-            alt="community photo"
-            className="w-[55%] md:w-[65%] lg:w-[85%] rounded-2xl object-contain"
+            src={ReputationImg}
+            alt="Reputation photo"
+            className="w-[55%] md:w-[65%] lg:w-[90%] rounded-2xl object-contain"
           />
         </div>
       </div>
@@ -88,4 +88,4 @@ const Community = () => {
   );
 };
 
-export default Community;
+export default Reputation;
