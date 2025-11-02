@@ -4,8 +4,8 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
-import communityImg from "../../assets/images/community.png";
 import leavesRight from "../../assets/images/tree.png";
+import communityImage from "../../assets/images/community.png"
 
 const Community = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -74,7 +74,7 @@ const Community = () => {
 
         <div className="w-full lg:w-1/2 flex justify-center relative z-20">
           <img
-            src={communityImg}
+            src={communityImage}
             alt="community photo"
             className="w-[55%] md:w-[65%] lg:w-[85%] rounded-2xl object-contain"
           />
