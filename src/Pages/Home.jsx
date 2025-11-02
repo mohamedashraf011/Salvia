@@ -7,6 +7,7 @@ import seedsImage from '../assets/images/seeds.png';
 import leavesImage from '../assets/images/dried-leaves.png';
 import flowersImage from '../assets/images/dried-flowers.png';
 import logoImage from '../assets/images/logo.png';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -79,11 +80,13 @@ function Home() {
         </button>
 
 
+      <Link to="/">
         <img
           src={logoImage}
           alt="Salvia Naturals Logo"
           className="w-auto h-auto select-none"
         />
+      </Link>
       </div>
 
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />

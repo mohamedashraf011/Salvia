@@ -1,5 +1,6 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Home from "./Pages/Home";
 import Sidebar from "./Components/Sidebar";
 import About from "./Pages/About Us/About";
@@ -25,40 +26,211 @@ import Contact from "./Pages/Contact US/Contact";
 import Certificates from "./Pages/Certificates/Certificates";
 import Page9 from "./Pages/Page9/Page9";
 import Page10 from "./Pages/Page10/Page10";
+import PageTransition from "./Components/PageTransition";
 
+function AppRoutes() {
+  const location = useLocation();
 
-
+  return (
+    <div style={{ position: "relative", width: "100%", height: "100%", backgroundColor: "transparent" }}>
+      <AnimatePresence mode="wait" initial={false}>
+        <Routes location={location} key={location.pathname}>
+        <Route
+          path="/"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Home />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <About />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/mission"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Mission />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/community"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Community />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/reputation"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Reputation />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/vision"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Vision />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/product"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Product />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/product-details/:title"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <ProductDetails />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/our-quality"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <OurQuality />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/r-and-d"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <RnDPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/innovation"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Innovation />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/product-development"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <ProductDevelopment />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/quality"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Quality />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/packaging"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Packaging />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/commitment"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Commitment />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/gallary"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Gallary />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/events"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Events />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/event/:id"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <EventDetail />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/event-information"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <EventInformation />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Contact />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/certificates"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Certificates />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/page9"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Page9 />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/page10"
+          element={
+            <PageTransition pageKey={location.pathname}>
+              <Page10 />
+            </PageTransition>
+          }
+        />
+        </Routes>
+      </AnimatePresence>
+    </div>
+  );
+}
 
 function App() {
   return (
     <>
       <Router>
         <Sidebar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/mission" element={<Mission />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/reputation" element={<Reputation />} />
-          <Route path="/vision" element={<Vision />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/product-details/:title" element={<ProductDetails />} />
-          <Route path="/our-quality" element={<OurQuality />} />
-          <Route path="/r-and-d" element={<RnDPage />} />
-          <Route path="/innovation" element={<Innovation />} />
-          <Route path="/product-development" element={<ProductDevelopment />} />
-          <Route path="/quality" element={<Quality />} />
-          <Route path="/packaging" element={<Packaging />} />
-          <Route path="/commitment" element={<Commitment />} />
-          <Route path="/gallary" element={<Gallary />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/event/:id" element={<EventDetail />} />
-          <Route path="/event-information" element={<EventInformation />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/certificates" element={<Certificates />} />
-          <Route path="/page9" element={<Page9 />} />
-          <Route path="/page10" element={<Page10 />} />
-        </Routes>
+        <AppRoutes />
       </Router>
     </>
   );

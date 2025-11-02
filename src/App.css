@@ -1,0 +1,17 @@
+/* Prevent white flash during page transitions */
+html, body {
+  background-color: #f5f5f5;
+  overflow-x: hidden;
+}
+
+#root {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* Ensure footer stays visible during transitions */
+footer {
+  z-index: 1000;
+  pointer-events: auto;
+  position: relative;
+}
