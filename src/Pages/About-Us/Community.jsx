@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
 import leavesRight from "../../assets/images/tree.png";
-import communityImage from "../../assets/images/community.png"
+import communityImage from "../../assets/images/Community.png"
 
 const Community = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
