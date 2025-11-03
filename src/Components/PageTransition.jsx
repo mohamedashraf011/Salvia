@@ -9,7 +9,7 @@ const pageVariants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.1,
       ease: [0.43, 0.13, 0.23, 0.96],
     },
   },
@@ -17,7 +17,7 @@ const pageVariants = {
     opacity: 0,
     x: -30,
     transition: {
-      duration: 0.3,
+      duration: 0.1,
       ease: [0.43, 0.13, 0.23, 0.96],
     },
   },
@@ -46,4 +46,3 @@ function PageTransition({ children, pageKey }) {
 }
 
 export default PageTransition;
-
