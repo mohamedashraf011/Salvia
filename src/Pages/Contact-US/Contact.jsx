@@ -64,7 +64,7 @@ const Contact = () => {
         <img
           src={root}
           alt=""
-          className="absolute top-[-50px] md:top-[0px] right-[-50px] md:right-[-100px] w-[300px] md:w-[400px] h-auto transform -translate-x-1/4 z-60"
+          className="absolute top-[-50px] md:top-[0px] right-[-50px] md:right-[-130px] w-[300px] md:w-[400px] h-auto transform -translate-x-1/4 z-60"
         />
 
         <img

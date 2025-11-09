@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 const pageVariants = {
   initial: {
     opacity: 0,
-    x: 30,
+    y: 30,
   },
   animate: {
     opacity: 1,
-    x: 0,
+    y: 0,
     transition: {
       duration: 0.1,
       ease: [0.43, 0.13, 0.23, 0.96],
@@ -15,7 +15,7 @@ const pageVariants = {
   },
   exit: {
     opacity: 0,
-    x: -30,
+    y: -30,
     transition: {
       duration: 0.1,
       ease: [0.43, 0.13, 0.23, 0.96],

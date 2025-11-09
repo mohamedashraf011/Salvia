@@ -5,7 +5,7 @@ import { FaBars } from "react-icons/fa";
 const Footer = ({ toggleSidebar, className = "" }) => {
   return (
     <footer
-      className={`relative w-full overflow-hidden min-h-[200px] ${className}`}
+      className={`relative w-full overflow-hidden min-h-[200px] mt-[-100px] ${className}`}
     >
       <img
         src={soilImage}

@@ -160,7 +160,7 @@ const OurQuality = () => {
 
       {/* Footer Text */}
       <div>
-        <p className="text-center text-xl font-semibold text-gray-100 leading-relaxed">
+        <p className="text-center text-xl font-semibold text-gray-100 leading-relaxed mb-[50px]">
           At Salvia Naturals, we are not only delivering herbs - we are
           delivering trust, safety, and excellence with every shipment.
         </p>
