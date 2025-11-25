@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../../Components/Sidebar";
 import Footer from "../../Components/Footer";
 import { FiMapPin, FiPhone, FiMail } from "react-icons/fi";
@@ -7,12 +7,139 @@ import trunk from "../../assets/images/Contact2.png";
 import Signboard from "../../assets/images/Contact3.png";
 import flower from "../../assets/images/Contact4.png";
 import logo from "../../assets/images/logo.png";
+import { DOMAIN } from "../../utils/Domain";
 
 const Contact = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [siteInfo, setSiteInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  useEffect(() => {
+    const fetchSiteInfo = async () => {
+      try {
+        const response = await fetch(`${DOMAIN}/api/contact-us/site-info`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch contact data: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        setSiteInfo(data);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching contact site info:", err);
+        setError(err.message || "Failed to fetch contact data. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSiteInfo();
+  }, []);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleCloseSidebar = () => setIsSidebarOpen(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch(`${DOMAIN}/api/contact-us/inquiry`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to send message");
+      }
+
+      setSubmitStatus({
+        type: "success",
+        message: "Message sent successfully! We will get back to you soon."
+      });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setSubmitStatus({
+        type: "error",
+        message: error.message || "Something went wrong. Please try again."
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // Show error state for site info
+  if (error) {
+    return (
+      <section className="relative flex flex-col min-h-screen overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white">
+        <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
+        
+        <div className="flex-grow flex items-center justify-center px-4">
+          <div className="max-w-md text-center">
+            <div className="bg-red-500/20 border border-red-500 rounded-lg p-6 mb-4">
+              <h2 className="text-2xl font-bold text-red-300 mb-2">Error Loading Contact Information</h2>
+              <p className="text-white">{error}</p>
+            </div>
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-[#4E6347] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3a4d35] transition-colors"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+
+        <div className="fixed bottom-0 left-0 w-full z-[9999]">
+          <Footer toggleSidebar={toggleSidebar} />
+        </div>
+      </section>
+    );
+  }
+
+  // Show loading state
+  if (loading) {
+    return (
+      <section className="relative flex flex-col min-h-screen overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white">
+        <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
+        
+        <div className="flex-grow flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
+            <p className="text-xl">Loading contact information...</p>
+          </div>
+        </div>
+
+        <div className="fixed bottom-0 left-0 w-full z-[9999]">
+          <Footer toggleSidebar={toggleSidebar} />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="relative flex flex-col min-h-screen overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white">
@@ -21,42 +148,64 @@ const Contact = () => {
       <div className="flex-grow relative z-10 px-4 md:px-20 pb-32 md:pb-28 flex">
         <div className="w-full md:w-1/2 max-w-lg py-12 flex flex-col items-start z-20">
           <h1 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
-            Let's Work Together
+            {siteInfo?.pageTitle || "Contact Us"}
           </h1>
-          <form className="w-full space-y-6">
+          <form className="w-full space-y-6" onSubmit={handleSubmit}>
+            {submitStatus && (
+              <div className={`p-4 rounded-lg ${submitStatus.type === 'success' ? 'bg-green-500/20 text-green-100 border border-green-500' : 'bg-red-500/20 text-red-100 border border-red-500'}`}>
+                {submitStatus.message}
+              </div>
+            )}
             <div className="w-full">
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="Name"
+                required
                 className="w-full p-3 bg-transparent border border-white rounded-lg text-white placeholder-gray-300 focus:outline-none focus:border-green-400 text-sm"
               />
             </div>
             <div className="w-full">
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Email"
+                required
                 className="w-full p-3 bg-transparent border border-white rounded-lg text-white placeholder-gray-300 focus:outline-none focus:border-green-400 text-sm"
               />
             </div>
             <div className="w-full">
               <input
                 type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
                 placeholder="Subject"
+                required
                 className="w-full p-3 bg-transparent border border-white rounded-lg text-white placeholder-gray-300 focus:outline-none focus:border-green-400 text-sm"
               />
             </div>
             <div className="w-full">
               <textarea
                 rows={3}
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 placeholder="Message"
+                required
                 className="w-full p-3 bg-transparent border border-white rounded-lg text-white placeholder-gray-300 focus:outline-none focus:border-green-400 resize-none text-sm"
               ></textarea>
             </div>
             <button
               type="submit"
-              className="w-full bg-[#4E6347] text-white py-3 rounded-lg font-semibold hover:bg-[#3a4d35] transition-colors text-sm cursor-pointer relative z-50 hover:z-[10000]"
+              disabled={submitting}
+              className={`w-full bg-[#4E6347] text-white py-3 rounded-lg font-semibold hover:bg-[#3a4d35] transition-colors text-sm cursor-pointer relative z-50 hover:z-[10000] ${submitting ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
-              Send Message
+              {submitting ? "Sending..." : "Send Message"}
             </button>
           </form>
         </div>
@@ -83,22 +232,20 @@ const Contact = () => {
 
           <div className="absolute top-40  w-64 md:w-80 text-left text-sm md:text-base ml-4 md:ml-8 pt-2">
             <p className="text-[#D3D4C6] mb-4 leading-relaxed">
-              At Salvia, we're always ready to connect with distributors,
-              importers, and manufacturers. Worldwide: Reach out today and let's
-              grow together.
+              {siteInfo?.description || ""}
             </p>
             <div className="space-y-2 text-xs md:text-base">
               <div className="flex items-center">
                 <FiMapPin className="w-4 h-4 text-white mr-2" />
-                <span>Address: Fayoum, Egypt</span>
+                <span>Address: {siteInfo?.address || ""}</span>
               </div>
               <div className="flex items-center">
                 <FiPhone className="w-4 h-4 text-white mr-2" />
-                <span>Phone: +20 1055673304</span>
+                <span>Phone: {siteInfo?.phone || ""}</span>
               </div>
               <div className="flex items-center">
                 <FiMail className="w-4 h-4 text-white mr-2" />
-                <span>Email: info@salvianaturals.com</span>
+                <span>Email: {siteInfo?.email || ""}</span>
               </div>
             </div>
           </div>

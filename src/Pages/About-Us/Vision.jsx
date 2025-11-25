@@ -6,13 +6,39 @@ import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
 import VisionImg from "../../assets/images/vision.png";
 import leavesRight from "../../assets/images/tree.png";
+import { DOMAIN } from "../../utils/Domain";
 
 const Vision = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [sectionData, setSectionData] = useState({
+    name: "Our Vision",
+    details: "Our vision is to continue expanding internationally while upholding our core values of quality, sustainability, and partnership. At Salvia Naturals, we believe that nature offers the best solutions - and it is our responsibility to share them with the world."
+  });
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    
+    const fetchSectionData = async () => {
+      try {
+        const response = await fetch(`${DOMAIN}/api/about-us/sections`);
+        const data = await response.json();
+        // Try to find a matching section
+        const section = data.sections.find(s => s.name.toLowerCase().includes("vision")) ||
+                       data.sections.find(s => s.name === "Our Values");
+        if (section) {
+          setSectionData(section);
+        }
+      } catch (error) {
+        console.error("Error fetching section data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSectionData();
+    
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -53,14 +79,10 @@ const Vision = () => {
         <div className="flex flex-col items-start justify-center w-full lg:w-1/2 gap-6 text-left">
           <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500">
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-              <span className="block">Our Vision</span>
+              <span className="block">{loading ? "Our Vision" : sectionData.name}</span>
             </h1>
             <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed">
-              Our vision is to continue expanding internationally while
-              upholding our core values of quality, sustainability, and
-              partnership. At Salvia Naturals, we believe that nature offers the
-              best solutions - and it is our responsibility to share them with
-              the world.
+              {loading ? "Loading..." : sectionData.details}
             </p>
           </div>
         </div>

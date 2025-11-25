@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion as Motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
@@ -6,10 +6,35 @@ import tree from "../../assets/images/tree.png";
 import tractor from "../../assets/images/tractor.png";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
+import { DOMAIN } from "../../utils/Domain";
 
 function Mission() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [sectionData, setSectionData] = useState({
+    name: "Our Mission",
+    details: "Our mission is to deliver products that combine authenticity, purity, and consistency. Every step of our process - from carefully selecting raw materials at the farm level, to applying rigorous processing and quality control measures - is designed to meet international food safety and quality standards."
+  });
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchSectionData = async () => {
+      try {
+        const response = await fetch(`${DOMAIN}/api/about-us/sections`);
+        const data = await response.json();
+        const missionSection = data.sections.find(section => section.name === "Our Mission");
+        if (missionSection) {
+          setSectionData(missionSection);
+        }
+      } catch (error) {
+        console.error("Error fetching section data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSectionData();
+  }, []);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleCloseSidebar = () => setIsSidebarOpen(false);
@@ -52,18 +77,13 @@ function Mission() {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-extrabold text-white self-start">
-            Our Mission
+            {loading ? "Our Mission" : sectionData.name}
           </h1>
         </div>
 
         <div className="max-w-xl text-left text-2xl leading-relaxed self-start">
           <p>
-            Our mission is to deliver products that combine
-            <br /> authenticity, purity, and consistency. Every step of
-            <br /> our process - from carefully selecting raw materials
-            <br /> at the farm level, to applying rigorous processing and
-            <br /> quality control measures - is designed to meet
-            <br /> international food safety and quality standards.
+            {loading ? "Loading..." : sectionData.details}
           </p>
         </div>
       </div>
