@@ -72,6 +72,8 @@ function Home() {
         <img
           src={soilImage}
           alt="Soil"
+          width="1440"
+          height="342"
           className="absolute bottom-0 w-full h-full object-cover"
         />
       </div>
