@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import tree from "../../assets/images/tree.png";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
+import SEOHead from "../../Components/SEOHead";
 import { FaBoxOpen, FaSyncAlt } from "react-icons/fa";
 import { FiShield } from "react-icons/fi";
 import { TbMicroscope } from "react-icons/tb";
@@ -10,6 +11,7 @@ import microbiologyIcon from "../../assets/images/microbiology.png";
 import healthicons from "../../assets/images/healthicons.png";
 import axios from "axios";
 import { DOMAIN } from "../../utils/Domain";
+import { getBreadcrumbSchema } from "../../utils/schemas";
 
 
 const OurQuality = () => {
@@ -24,7 +26,6 @@ const OurQuality = () => {
   const [error, setError] = useState(null);
 
   const toggleSidebar = () => {
-    console.log("Toggle clicked! State will be:", !isSidebarOpen);
     setIsSidebarOpen(!isSidebarOpen);
   };
 
@@ -89,92 +90,120 @@ const OurQuality = () => {
   const getIconForSection = (sectionName) => {
     const name = sectionName.toLowerCase();
     if (name.includes('safety') || name.includes('compliance')) {
-      return <FiShield className="text-2xl" />;
+      return <FiShield className="text-2xl" aria-hidden="true" />;
     } else if (name.includes('pesticide') || name.includes('heavy') || name.includes('microscope')) {
-      return <TbMicroscope className="text-2xl" />;
+      return <TbMicroscope className="text-2xl" aria-hidden="true" />;
     } else if (name.includes('microbiology') || name.includes('yeast') || name.includes('mould')) {
-      return <img src={microbiologyIcon} alt="Microbiology Icon" className="w-8 h-8 object-contain" />;
+      return <img src={microbiologyIcon} alt="" aria-hidden="true" className="w-8 h-8 object-contain" />;
     } else if (name.includes('moisture') || name.includes('water')) {
-      return <BsMoisture className="text-2xl" />;
+      return <BsMoisture className="text-2xl" aria-hidden="true" />;
     } else if (name.includes('pyrrolizidine') || name.includes('pahs') || name.includes('health')) {
-      return <img src={healthicons} alt="Health Icon" className="w-8 h-8 object-contain" />;
+      return <img src={healthicons} alt="" aria-hidden="true" className="w-8 h-8 object-contain" />;
     } else if (name.includes('packaging') || name.includes('box')) {
-      return <FaBoxOpen className="text-2xl" />;
+      return <FaBoxOpen className="text-2xl" aria-hidden="true" />;
     } else if (name.includes('continuous') || name.includes('improvement') || name.includes('sync')) {
-      return <FaSyncAlt className="text-2xl" />;
+      return <FaSyncAlt className="text-2xl" aria-hidden="true" />;
     } else {
-      return <FiShield className="text-2xl" />; // Default icon
+      return <FiShield className="text-2xl" aria-hidden="true" />;
     }
   };
 
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Our Quality Commitment", path: "/our-quality" }
+  ]);
+
   if (loading) {
     return (
-      <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D]">
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-2xl">Loading...</div>
-        </div>
-      </div>
+      <>
+        <SEOHead
+          title="Our Quality Commitment | Food Safety & Compliance - Salvia Naturals"
+          description="Discover our rigorous quality standards for dried herbs and botanicals. HACCP compliant, pesticide-free, and internationally certified products."
+          canonicalUrl="/our-quality"
+        />
+        <main className="relative min-h-screen text-white overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D]">
+          <div className="flex items-center justify-center min-h-screen" role="status" aria-live="polite">
+            <div className="text-2xl">Loading...</div>
+          </div>
+        </main>
+      </>
     );
   }
 
   if (error) {
     return (
-      <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D]">
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-xl text-red-300">{error}</div>
-        </div>
-      </div>
+      <>
+        <SEOHead
+          title="Our Quality Commitment | Food Safety & Compliance - Salvia Naturals"
+          description="Discover our rigorous quality standards for dried herbs and botanicals. HACCP compliant, pesticide-free, and internationally certified products."
+          canonicalUrl="/our-quality"
+        />
+        <main className="relative min-h-screen text-white overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D]">
+          <div className="flex items-center justify-center min-h-screen" role="alert">
+            <div className="text-xl text-red-300">{error}</div>
+          </div>
+        </main>
+      </>
     );
   }
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D]">
-      <img
-        src={tree}
-        alt="Tree"
-        className="absolute top-0 right-0 w-40 md:w-65 opacity-90 select-none pointer-events-none"
+    <>
+      <SEOHead
+        title="Our Quality Commitment | Food Safety & Compliance - Salvia Naturals"
+        description="Discover our rigorous quality standards for dried herbs and botanicals. HACCP compliant, pesticide-free, and internationally certified products from Egypt."
+        keywords="quality herbs Egypt, food safety compliance, HACCP certified herbs, pesticide-free botanicals, herb quality control, microbiology testing herbs"
+        canonicalUrl="/our-quality"
+        schema={breadcrumbSchema}
       />
+      <main className="relative min-h-screen text-white overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D]">
+        <img
+          src={tree}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="absolute top-0 right-0 w-40 md:w-65 opacity-90 select-none pointer-events-none"
+        />
 
-      {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-10 md:pt-12 space-y-12">
-        {/* Title */}
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-wide">
-          {pageData.pageTitle}
-        </h2>
+        {/* Main Content */}
+        <article className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-10 md:pt-12 space-y-12">
+          {/* Title */}
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-wide">
+            {pageData.pageTitle}
+          </h1>
 
-        {/* Intro Paragraph */}
-        <p className="text-lg leading-loose text-gray-100 max-w-4xl pb-6">
-          {pageData.intro}
-        </p>
+          {/* Intro Paragraph */}
+          <p className="text-lg leading-loose text-gray-100 max-w-4xl pb-6">
+            {pageData.intro}
+          </p>
 
-        {/* Quality Points */}
-        <div className="grid md:grid-cols-2 gap-x-18 gap-y-12 -mt-12">
-          {sections.map((section, index) => (
-            <div key={index} className={`space-y-4 ${index === sections.length - 1 ? 'md:col-span-2' : ''}`}>
-              <div className="flex items-center gap-3">
-                {getIconForSection(section.name)}
-                <h3 className="text-xl font-semibold">
-                  {section.name}
-                </h3>
+          {/* Quality Points */}
+          <section className="grid md:grid-cols-2 gap-x-18 gap-y-12 -mt-12" aria-label="Quality commitment points">
+            {sections.map((section, index) => (
+              <div key={index} className={`space-y-4 ${index === sections.length - 1 ? 'md:col-span-2' : ''}`}>
+                <div className="flex items-center gap-3">
+                  {getIconForSection(section.name)}
+                  <h2 className="text-xl font-semibold">
+                    {section.name}
+                  </h2>
+                </div>
+                <p className="text-[#D3D4C6] leading-relaxed">
+                  {section.details}
+                </p>
               </div>
-              <p className="text-[#D3D4C6] leading-relaxed">
-                {section.details}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+            ))}
+          </section>
+        </article>
 
-      {/* Footer Text */}
-      <div>
-        <p className="text-center text-xl font-semibold text-gray-100 leading-relaxed mb-[50px]">
-          {pageData.finalTitle}
-        </p>
-      </div>
+        {/* Footer Text */}
+        <aside className="text-center text-xl font-semibold text-gray-100 leading-relaxed mb-[50px] px-4">
+          <p>{pageData.finalTitle}</p>
+        </aside>
 
-      <Footer toggleSidebar={toggleSidebar} />
-      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
-    </div>
+        <Footer toggleSidebar={toggleSidebar} />
+        <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
+      </main>
+    </>
   );
 };
 

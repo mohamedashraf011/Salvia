@@ -38,7 +38,6 @@ function Sidebar({ isOpen, onClose }) {
     fetchPageStatus();
   }, []);
   
-  console.log(showPage9Data, showPage10Data);
   return (
     <div
       className={`fixed inset-0 z-[10000] bg-black/30 backdrop-blur-[2px] transition-opacity duration-500 ${
