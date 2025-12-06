@@ -1,193 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaSearch, FaSeedling, FaLeaf } from "react-icons/fa";
+import { FaSearch, FaSeedling } from "react-icons/fa";
 import { GiHerbsBundle } from "react-icons/gi";
 import { PiFlowerTulipBold } from "react-icons/pi";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
 import ProductCard from "../../Components/ProductCard";
-import anise from "../../assets/images/anise.png";
-import artichoke from "../../assets/images/artichoke.png";
-import basil from "../../assets/images/basil.png";
-import caraway from "../../assets/images/caraway.png";
 import leavesRight from "../../assets/images/tree.png";
-
-const products = [
-  {
-    image: anise,
-    title: "ANISE SEEDS",
-    subtitle: "Pimpinella Anisum",
-    category: "Seeds",
-    description:
-      "Anise seeds are widely used for their aromatic flavor and health benefits.",
-    details: [
-      { label: "Product description", value: "Egyptian anise seeds" },
-      { label: "Latin name of anise seeds", value: "Pimpinella anisum" },
-      { label: "Scientific name of anise seeds", value: "Pimpinella anisum" },
-      { label: "Part use", value: "Seeds" },
-      { label: "HS code of anise seeds", value: "0909" },
-      { label: "Smell and taste of anise", value: "Aromatic, typical" },
-      { label: "Origin of anise seeds", value: "Egypt" },
-      { label: "Color of anise seeds", value: "Greenish to middle brown" },
-      { label: "Harvest", value: "Conventional anise seeds and organic" },
-    ],
-  },
-  {
-    image: artichoke,
-    title: "ARTICHOKE",
-    subtitle: "Cynara Scolymus",
-    category: "Dried Leaves",
-    description:
-      "Artichoke leaves are used for herbal tea and medicinal extracts.",
-    details: [
-      { label: "Product description", value: "Egyptian artichoke leaves" },
-      { label: "Latin name of artichoke", value: "Cynara scolymus" },
-      { label: "Scientific name of artichoke", value: "Cynara scolymus" },
-      { label: "Part use", value: "Leaves" },
-      { label: "HS code of artichoke", value: "0712" },
-      { label: "Smell and taste", value: "Mild, herbal" },
-      { label: "Origin", value: "Egypt" },
-      { label: "Color", value: "Green to light brown" },
-      { label: "Harvest", value: "Conventional and organic" },
-    ],
-  },
-  {
-    image: basil,
-    title: "BASIL",
-    subtitle: "Ocimum Basilicum",
-    category: "Dried Leaves",
-    description:
-      "Basil leaves are aromatic and used in many cuisines and herbal preparations.",
-    details: [
-      { label: "Product description", value: "Egyptian basil leaves" },
-      { label: "Latin name", value: "Ocimum basilicum" },
-      { label: "Scientific name", value: "Ocimum basilicum" },
-      { label: "Part use", value: "Leaves" },
-      { label: "HS code", value: "0910" },
-      { label: "Smell and taste", value: "Strong aromatic" },
-      { label: "Origin", value: "Egypt" },
-      { label: "Color", value: "Dark green" },
-      { label: "Harvest", value: "Conventional and organic" },
-    ],
-  },
-  {
-    image: caraway,
-    title: "CARAWAY SEEDS",
-    subtitle: "Matricaria Chamomilla",
-    category: "Seeds",
-    description:
-      "Caraway seeds are used for seasoning and in herbal remedies.",
-    details: [
-      { label: "Product description", value: "Egyptian caraway seeds" },
-      { label: "Latin name", value: "Carum carvi" },
-      { label: "Scientific name", value: "Carum carvi" },
-      { label: "Part use", value: "Seeds" },
-      { label: "HS code", value: "0909" },
-      { label: "Smell and taste", value: "Warm, spicy, sweet" },
-      { label: "Origin", value: "Egypt" },
-      { label: "Color", value: "Brownish green" },
-      { label: "Harvest", value: "Conventional and organic" },
-    ],
-  },
-
-  {
-    image: anise,
-    title: "ANISE SEEDS",
-    subtitle: "Pimpinella Anisum",
-    category: "Seeds",
-    description:
-      "Anise seeds are widely used for their aromatic flavor and health benefits.",
-    details: [
-      { label: "Product description", value: "Egyptian anise seeds" },
-      { label: "Latin name of anise seeds", value: "Pimpinella anisum" },
-      { label: "Scientific name of anise seeds", value: "Pimpinella anisum" },
-      { label: "Part use", value: "Seeds" },
-      { label: "HS code of anise seeds", value: "0909" },
-      { label: "Smell and taste of anise", value: "Aromatic, typical" },
-      { label: "Origin of anise seeds", value: "Egypt" },
-      { label: "Color of anise seeds", value: "Greenish to middle brown" },
-      { label: "Harvest", value: "Conventional anise seeds and organic" },
-    ],
-  },
-  {
-    image: artichoke,
-    title: "ARTICHOKE",
-    subtitle: "Cynara Scolymus",
-    category: "Dried Leaves",
-    description:
-      "Artichoke leaves are used for herbal tea and medicinal extracts.",
-    details: [
-      { label: "Product description", value: "Egyptian artichoke leaves" },
-      { label: "Latin name of artichoke", value: "Cynara scolymus" },
-      { label: "Scientific name of artichoke", value: "Cynara scolymus" },
-      { label: "Part use", value: "Leaves" },
-      { label: "HS code of artichoke", value: "0712" },
-      { label: "Smell and taste", value: "Mild, herbal" },
-      { label: "Origin", value: "Egypt" },
-      { label: "Color", value: "Green to light brown" },
-      { label: "Harvest", value: "Conventional and organic" },
-    ],
-  },
-  {
-    image: basil,
-    title: "BASIL",
-    subtitle: "Ocimum Basilicum",
-    category: "Dried Leaves",
-    description:
-      "Basil leaves are aromatic and used in many cuisines and herbal preparations.",
-    details: [
-      { label: "Product description", value: "Egyptian basil leaves" },
-      { label: "Latin name", value: "Ocimum basilicum" },
-      { label: "Scientific name", value: "Ocimum basilicum" },
-      { label: "Part use", value: "Leaves" },
-      { label: "HS code", value: "0910" },
-      { label: "Smell and taste", value: "Strong aromatic" },
-      { label: "Origin", value: "Egypt" },
-      { label: "Color", value: "Dark green" },
-      { label: "Harvest", value: "Conventional and organic" },
-    ],
-  },
-  {
-    image: caraway,
-    title: "CARAWAY SEEDS",
-    subtitle: "Matricaria Chamomilla",
-    category: "Seeds",
-    description:
-      "Caraway seeds are used for seasoning and in herbal remedies.",
-    details: [
-      { label: "Product description", value: "Egyptian caraway seeds" },
-      { label: "Latin name", value: "Carum carvi" },
-      { label: "Scientific name", value: "Carum carvi" },
-      { label: "Part use", value: "Seeds" },
-      { label: "HS code", value: "0909" },
-      { label: "Smell and taste", value: "Warm, spicy, sweet" },
-      { label: "Origin", value: "Egypt" },
-      { label: "Color", value: "Brownish green" },
-      { label: "Harvest", value: "Conventional and organic" },
-    ],
-  },
-];
+import { DOMAIN } from "../../utils/Domain";
 
 function Products() {
+  const [products, setProducts] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("All");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${DOMAIN}/api/products`);
+        const data = await response.json();
+        if (data.products) {
+          setProducts(data.products);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleCloseSidebar = () => setIsSidebarOpen(false);
 
   const filteredProducts = products.filter((p) => {
     const matchesSearch =
-      p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      p.subtitle.toLowerCase().includes(searchTerm.toLowerCase());
+      p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (p.shortDescription && p.shortDescription.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory =
       filterCategory === "All" || p.category === filterCategory;
     return matchesSearch && matchesCategory;
   });
 
   const handleCardClick = (product) => {
-    navigate(`/product-details/${product.title}`, { state: product });
+    navigate(`/product-details/${product._id}`);
   };
 
   return (
@@ -277,8 +134,8 @@ function Products() {
                   >
                     <ProductCard
                       image={p.image}
-                      title={p.title}
-                      subtitle={p.subtitle}
+                      title={p.name}
+                      subtitle={p.shortDescription}
                     />
                   </div>
                 ))

@@ -6,15 +6,14 @@ import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
 import VisionImg from "../../assets/images/vision.png";
 import leavesRight from "../../assets/images/tree.png";
-import { DOMAIN } from "../../utils/Domain";
+import { fetchAboutSections } from "../../api/about";
+import Loader from "../../Components/Loader";
 
 const Vision = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [sectionData, setSectionData] = useState({
-    name: "Our Vision",
-    details: "Our vision is to continue expanding internationally while upholding our core values of quality, sustainability, and partnership. At Salvia Naturals, we believe that nature offers the best solutions - and it is our responsibility to share them with the world."
-  });
+  const [sectionData, setSectionData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,16 +21,16 @@ const Vision = () => {
     
     const fetchSectionData = async () => {
       try {
-        const response = await fetch(`${DOMAIN}/api/about-us/sections`);
-        const data = await response.json();
+        setLoading(true);
+        const data = await fetchAboutSections();
         // Try to find a matching section
         const section = data.sections.find(s => s.name.toLowerCase().includes("vision")) ||
                        data.sections.find(s => s.name === "Our Values");
-        if (section) {
-          setSectionData(section);
-        }
+        setSectionData(section);
+        setError(false);
       } catch (error) {
         console.error("Error fetching section data:", error);
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -77,13 +76,21 @@ const Vision = () => {
         </div>
 
         <div className="flex flex-col items-start justify-center w-full lg:w-1/2 gap-6 text-left">
-          <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500">
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-              <span className="block">{loading ? "Our Vision" : sectionData.name}</span>
-            </h1>
-            <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed">
-              {loading ? "Loading..." : sectionData.details}
-            </p>
+          <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500 min-h-[200px] flex flex-col justify-center">
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+                  <span className="block">{!error && sectionData ? sectionData.name : "Our Vision"}</span>
+                </h1>
+                <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed">
+                  {!error && sectionData ? sectionData.details : (
+                    "Our vision is to continue expanding internationally while upholding our core values of quality, sustainability, and partnership. At Salvia Naturals, we believe that nature offers the best solutions - and it is our responsibility to share them with the world."
+                  )}
+                </p>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -6,28 +6,27 @@ import tree from "../../assets/images/tree.png";
 import tractor from "../../assets/images/tractor.png";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
-import { DOMAIN } from "../../utils/Domain";
+import { fetchAboutSections } from "../../api/about";
+import Loader from "../../Components/Loader";
 
 function Mission() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [sectionData, setSectionData] = useState({
-    name: "Our Mission",
-    details: "Our mission is to deliver products that combine authenticity, purity, and consistency. Every step of our process - from carefully selecting raw materials at the farm level, to applying rigorous processing and quality control measures - is designed to meet international food safety and quality standards."
-  });
+  const [sectionData, setSectionData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSectionData = async () => {
       try {
-        const response = await fetch(`${DOMAIN}/api/about-us/sections`);
-        const data = await response.json();
+        setLoading(true);
+        const data = await fetchAboutSections();
         const missionSection = data.sections.find(section => section.name === "Our Mission");
-        if (missionSection) {
-          setSectionData(missionSection);
-        }
+        setSectionData(missionSection);
+        setError(false);
       } catch (error) {
         console.error("Error fetching section data:", error);
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -77,14 +76,20 @@ function Mission() {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-extrabold text-white self-start">
-            {loading ? "Our Mission" : sectionData.name}
+            {loading ? <Loader /> : (!error && sectionData ? sectionData.name : "Our Mission")}
           </h1>
         </div>
 
         <div className="max-w-xl text-left text-2xl leading-relaxed self-start">
-          <p>
-            {loading ? "Loading..." : sectionData.details}
-          </p>
+          {loading ? (
+             <div className="mt-10"><Loader /></div>
+          ) : (
+            <p>
+              {!error && sectionData ? sectionData.details : (
+                "Our mission is to deliver products that combine authenticity, purity, and consistency. Every step of our process - from carefully selecting raw materials at the farm level, to applying rigorous processing and quality control measures - is designed to meet international food safety and quality standards."
+              )}
+            </p>
+          )}
         </div>
       </div>
 

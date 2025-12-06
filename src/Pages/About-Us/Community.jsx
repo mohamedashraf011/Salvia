@@ -6,15 +6,14 @@ import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
 import leavesRight from "../../assets/images/tree.png";
 import communityImage from "../../assets/images/Community.png";
-import { DOMAIN } from "../../utils/Domain";
+import { fetchAboutSections } from "../../api/about";
+import Loader from "../../Components/Loader";
 
 const Community = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [sectionData, setSectionData] = useState({
-    name: "Sustainability & Community",
-    details: "We work closely with farmers and local communities, ensuring sustainable sourcing practices and supporting agricultural development in the region. By maintaining strong relationships throughout our supply chain, we are able to guarantee both traceability and reliability for our customers."
-  });
+  const [sectionData, setSectionData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,14 +21,14 @@ const Community = () => {
     
     const fetchSectionData = async () => {
       try {
-        const response = await fetch(`${DOMAIN}/api/about-us/sections`);
-        const data = await response.json();
+        setLoading(true);
+        const data = await fetchAboutSections();
         const teamSection = data.sections.find(section => section.name === "Our Team");
-        if (teamSection) {
-          setSectionData(teamSection);
-        }
+        setSectionData(teamSection);
+        setError(false);
       } catch (error) {
         console.error("Error fetching section data:", error);
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -80,13 +79,21 @@ const Community = () => {
               </Motion.div>
             </div>
 
-            <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500">
-              <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
-                <span className="block">{loading ? "Sustainability & Community" : sectionData.name}</span>
-              </h1>
-              <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
-                {loading ? "Loading..." : sectionData.details}
-              </p>
+            <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500 min-h-[200px] flex flex-col justify-center">
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
+                    <span className="block">{!error && sectionData ? sectionData.name : "Sustainability & Community"}</span>
+                  </h1>
+                  <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
+                    {!error && sectionData ? sectionData.details : (
+                      "We work closely with farmers and local communities, ensuring sustainable sourcing practices and supporting agricultural development in the region. By maintaining strong relationships throughout our supply chain, we are able to guarantee both traceability and reliability for our customers."
+                    )}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>

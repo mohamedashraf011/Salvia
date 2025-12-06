@@ -10,7 +10,7 @@ const Footer = ({ toggleSidebar, className = "" }) => {
       <img
         src={soilImage}
         alt="Soil Background"
-        className="w-full h-[250px] object-cover object-top"
+        className="w-full h-[220px] object-cover object-top"
       />
 
       <div className="absolute bottom-0.5 left-6 flex items-center gap-3 z-10">

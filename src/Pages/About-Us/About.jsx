@@ -5,31 +5,32 @@ import tree from "../../assets/images/tree.png";
 import { FaArrowDown } from "react-icons/fa";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
-import { DOMAIN } from "../../utils/Domain";
+import { fetchAboutPage } from "../../api/about";
+import Loader from "../../Components/Loader";
 
 function About() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [pageData, setPageData] = useState({
-    pageTitle: "About Us",
-    intro: "At Salvia Naturals, we take pride in being a trusted supplier and exporter of high-quality dried herbs and Botanicals. With a strong base in Egypt, our operations extend across some of the most fertile and diverse agricultural regions - from the northern fields of Egypt to the rich and unique landscapes of central and southern Sudan. This wide sourcing network allows us to provide a diverse portfolio of herbs with distinctive qualities, reflecting the natural richness of the Nile Valley."
-  });
+  const [pageData, setPageData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchPageData = async () => {
+    const loadData = async () => {
       try {
-        const response = await fetch(`${DOMAIN}/api/about-us/page`);
-        const data = await response.json();
+        setLoading(true);
+        const data = await fetchAboutPage();
         setPageData(data);
+        setError(false);
       } catch (error) {
         console.error("Error fetching page data:", error);
+        setError(true);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPageData();
+    loadData();
   }, []);
 
   const toggleSidebar = () => {
@@ -51,12 +52,20 @@ function About() {
           alt="leaves"
           className="absolute top-0 right-0 w-40 md:w-65 opacity-90"
         />
-        <h1 className="text-5xl md:text-9xl font-extrabold text-green-400 mt-12">
-          {loading ? "About Us" : pageData.pageTitle}
-        </h1>
-        <p className="max-w-3xl text-base md:text-lg text-gray-100 leading-relaxed">
-          {loading ? "Loading..." : pageData.intro}
-        </p>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <h1 className="text-5xl md:text-9xl font-extrabold text-green-400 mt-12">
+              {!error && pageData ? pageData.pageTitle : "About Us"}
+            </h1>
+            <p className="max-w-3xl text-base md:text-lg text-gray-100 leading-relaxed">
+              {!error && pageData ? pageData.intro : (
+                "At Salvia Naturals, we take pride in being a trusted supplier and exporter of high-quality dried herbs and Botanicals. With a strong base in Egypt, our operations extend across some of the most fertile and diverse agricultural regions - from the northern fields of Egypt to the rich and unique landscapes of central and southern Sudan. This wide sourcing network allows us to provide a diverse portfolio of herbs with distinctive qualities, reflecting the natural richness of the Nile Valley."
+              )}
+            </p>
+          </>
+        )}
 
         <Motion.div
           className="text-green-300 text-4xl cursor-pointer"

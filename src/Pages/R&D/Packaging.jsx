@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { fetchRnDSections } from "../../api/rnd";
 import { motion as Motion } from "framer-motion";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
+import Loader from "../../Components/Loader";
 import leftImage from "../../assets/images/packaging-left.png";
 import middleImage from "../../assets/images/packaging-middle.png";
 import rightImage from "../../assets/images/packaging-right.png";
@@ -12,10 +14,25 @@ import logopackag from "../../assets/images/logopackag.png";
 
 const Packaging = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [sectionData, setSectionData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchRnDSections();
+        const section = data.sections.find(s => s.name.includes("Packaging"));
+        setSectionData(section);
+      } catch (error) {
+        console.error("Failed to load Packaging section data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -75,16 +92,28 @@ const Packaging = () => {
             </div>
 
             {/* Title and Text */}
-            <div className="px-5 -translate-y-10 md:-translate-y-20 transition-all duration-500">
-              <h1 className="text-4xl md:text-7xl font-extrabold leading-tight mb-8">
-                <span className="block">Packaging &</span>
-                <span>Shelf-Life Studies</span>
-              </h1>
-              <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
-                We conduct ongoing research into safe and eco-friendly packaging
-                solutions that preserve the freshness, aroma, and integrity of
-                our herbs throughout the supply chain.
-              </p>
+            <div className="px-5 -translate-y-10 md:-translate-y-20 transition-all duration-500 min-h-[200px] flex flex-col justify-center">
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  <h1 className="text-4xl md:text-7xl font-extrabold leading-tight mb-8">
+                    {sectionData ? (
+                      <span className="block">{sectionData.name}</span>
+                    ) : (
+                      <>
+                        <span className="block">Packaging &</span>
+                        <span>Shelf-Life Studies</span>
+                      </>
+                    )}
+                  </h1>
+                  <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
+                    {sectionData ? sectionData.details : (
+                      "We conduct ongoing research into safe and eco-friendly packaging solutions that preserve the freshness, aroma, and integrity of our herbs throughout the supply chain."
+                    )}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>

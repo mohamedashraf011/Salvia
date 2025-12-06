@@ -1,14 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { fetchRnDPage } from '../../api/rnd';
 import { motion as Motion } from "framer-motion";
 import { FaArrowDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
+import Loader from "../../Components/Loader";
 import backgroundImage from "../../assets/images/RD.png";
 
 const RnDPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [pageData, setPageData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchRnDPage();
+        setPageData(data);
+        setError(false);
+      } catch (error) {
+        console.error("Failed to load R&D page data", error);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
 
   const toggleSidebar = () => {
     console.log("Toggle clicked! State will be:", !isSidebarOpen);
@@ -36,18 +58,34 @@ const RnDPage = () => {
 
       <div className="relative z-10 flex flex-col min-h-screen">
         <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-6 text-center text-white relative">
-          <div className="max-w-5xl mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 md:mb-8 drop-shadow-lg">
-              <span className="text-green-300">Research</span> & <span className="text-green-300">Development</span>
-            </h1>
-            <p className="text-base md:text-lg leading-relaxed drop-shadow-md">
-              At Salvia Natural, innovation and continuous improvement are at the heart of our business.
-              <br className="hidden md:block" />
-              Our Research & 
-              Development (R&D) activities are designed to ensure that we consistently deliver safe,
-              high-quality, and innovative herbal products to our global customers.
-            </p>
-          </div>
+          {loading ? (
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+              <Loader />
+            </div>
+          ) : (
+            <div className="max-w-5xl mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+              <h1 className="text-4xl md:text-6xl font-extrabold mb-6 md:mb-8 drop-shadow-lg">
+                {!error && pageData ? (
+                  <span className="text-green-300">{pageData.pageTitle}</span>
+                ) : (
+                  <>
+                    <span className="text-green-300">Research</span> & <span className="text-green-300">Development</span>
+                  </>
+                )}
+              </h1>
+              <p className="text-base md:text-lg leading-relaxed drop-shadow-md">
+                {!error && pageData ? pageData.intro : (
+                  <>
+                    At Salvia Natural, innovation and continuous improvement are at the heart of our business.
+                    <br className="hidden md:block" />
+                    Our Research & 
+                    Development (R&D) activities are designed to ensure that we consistently deliver safe,
+                    high-quality, and innovative herbal products to our global customers.
+                  </>
+                )}
+              </p>
+            </div>
+          )}
 
           <Motion.div
             className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30"

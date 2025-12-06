@@ -1,17 +1,34 @@
 import React, { useState, useEffect } from "react";
+import { fetchRnDSections } from "../../api/rnd";
 import { motion as Motion } from "framer-motion";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
+import Loader from "../../Components/Loader";
 import innovationImage from "../../assets/images/innovation.png";
 
 const Innovation = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [sectionData, setSectionData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchRnDSections();
+        const section = data.sections.find(s => s.name.includes("Innovation"));
+        setSectionData(section);
+      } catch (error) {
+        console.error("Failed to load Innovation section data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -50,18 +67,28 @@ const Innovation = () => {
               </Motion.div>
             </div>
 
-            <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500">
-              <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
-                <span className="block">Innovation</span>
-                <span>in Agriculture</span>
-              </h1>
-              <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
-                We collaborate closely with farmers in Egypt and Sudan to
-                implement sustainable agricultural practices, introduce improved
-                cultivation methods, and optimize harvesting techniques. This
-                allows us to enhance crop quality while ensuring environmental
-                responsibility.
-              </p>
+            <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500 min-h-[200px] flex flex-col justify-center">
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
+                    {sectionData ? (
+                      <span className="block">{sectionData.name}</span>
+                    ) : (
+                      <>
+                        <span className="block">Innovation</span>
+                        <span>in Agriculture</span>
+                      </>
+                    )}
+                  </h1>
+                  <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
+                    {sectionData ? sectionData.details : (
+                      "We collaborate closely with farmers in Egypt and Sudan to implement sustainable agricultural practices, introduce improved cultivation methods, and optimize harvesting techniques. This allows us to enhance crop quality while ensuring environmental responsibility."
+                    )}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>

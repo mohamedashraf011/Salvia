@@ -1,18 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
-import Gallary1 from "../../assets/images/Gallary1.png";
-import Gallary2 from "../../assets/images/Gallary2.png";
-import Gallary3 from "../../assets/images/Gallary3.png";
-import Gallary4 from "../../assets/images/Gallary4.png";
-// import sampleVideo from "../../assets/videos/sample.mp4";
 import tree from "../../assets/images/tree.png";
+import { DOMAIN } from "../../utils/Domain";
 
 function Gallery() {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch(`${DOMAIN}/api/gallery`);
+        const data = await response.json();
+        if (data.images) {
+          setImages(data.images);
+        }
+      } catch (error) {
+        console.error("Error fetching gallery images:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchImages();
+  }, []);
+
   const toggleSidebar = () => {
-    console.log("Toggle clicked! State will be:", !isSidebarOpen);
     setIsSidebarOpen(!isSidebarOpen);
   };
 
@@ -34,81 +48,21 @@ function Gallery() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl flex-1 overflow-y-auto pb-4 mx-auto scrollbar-hide">
-          <div className="relative bg-white rounded-lg shadow-lg">
-            <img
-              src={Gallary1}
-              alt="Gallery 1"
-              className="w-full h-auto"
-            />
-          </div>
-
-          <div className="relative bg-white rounded-lg shadow-lg">
-            <img
-              src={Gallary2}
-              alt="Gallery 2"
-              className="w-full h-auto"
-            />
-          </div>
-
-          <div className="relative bg-white rounded-lg shadow-lg">
-            <img
-              src={Gallary3}
-              alt="Gallery 3"
-              className="w-full h-auto"
-            />
-          </div>
-
-          <div className="relative bg-white rounded-lg shadow-lg">
-            <img
-              src={Gallary4}
-              alt="Gallery 4"
-              className="w-full h-auto"
-            />
-          </div>
-
-          {/* <div className="relative bg-white rounded-lg shadow-lg">
-            <video
-              src={sampleVideo}
-              controls
-              className="w-full h-auto"
-              poster={Gallary1}
-            >
-              Your browser does not support the video tag.
-            </video>
-          </div> */}
-
-          <div className="relative bg-white rounded-lg shadow-lg">
-            <iframe
-              src="https://www.youtube.com/embed/VIDEO_ID"
-              title="YouTube Video"
-              className="w-full h-64"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-
-          <div className="relative bg-white rounded-lg shadow-lg">
-            <img
-              src={Gallary1}
-              alt="Extra 1"
-              className="w-full h-auto"
-            />
-          </div>
-          <div className="relative bg-white rounded-lg shadow-lg">
-            <img
-              src={Gallary2}
-              alt="Extra 2"
-              className="w-full h-auto"
-            />
-          </div>
-          <div className="relative bg-white rounded-lg shadow-lg">
-            <img
-              src={Gallary3}
-              alt="Extra 3"
-              className="w-full h-auto"
-            />
-          </div>
+          {loading ? (
+             <p className="text-center col-span-full">Loading images...</p>
+          ) : images.length > 0 ? (
+            images.map((img, index) => (
+              <div key={img._id || index} className="relative h-fit bg-white rounded-lg shadow-lg">
+                <img
+                  src={img.image}
+                  alt={`Gallery ${index + 1}`}
+                  className="w-full h-auto rounded-lg"
+                />
+              </div>
+            ))
+          ) : (
+            <p className="text-center col-span-full">No images found.</p>
+          )}
         </div>
       </div>
 

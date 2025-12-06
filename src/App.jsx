@@ -92,7 +92,7 @@ function AppRoutes() {
           }
         />
         <Route
-          path="/product-details/:title"
+          path="/product-details/:id"
           element={
             <PageTransition pageKey={location.pathname}>
               <ProductDetails />
@@ -180,7 +180,7 @@ function AppRoutes() {
           }
         />
         <Route
-          path="/event-information"
+          path="/event-information/:id"
           element={
             <PageTransition pageKey={location.pathname}>
               <EventInformation />

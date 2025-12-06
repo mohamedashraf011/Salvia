@@ -1,17 +1,34 @@
 import React, { useState, useEffect } from "react";
+import { fetchRnDSections } from "../../api/rnd";
 import { motion as Motion } from "framer-motion";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
+import Loader from "../../Components/Loader";
 import QualityAndSafetyResearchImage from "../../assets/images/Quality.png";
 
 const Quality = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [sectionData, setSectionData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchRnDSections();
+        const section = data.sections.find(s => s.name.includes("Quality"));
+        setSectionData(section);
+      } catch (error) {
+        console.error("Failed to load Quality section data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -49,29 +66,43 @@ const Quality = () => {
               </Motion.div>
             </div>
 
-            <div className="px-5 -translate-y-8 md:-translate-y-22 transition-all duration-500">
-              <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
-                Quality & Safety Research
-              </h1>
+            <div className="px-5 -translate-y-8 md:-translate-y-22 transition-all duration-500 min-h-[200px] flex flex-col justify-center">
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
+                    {sectionData ? sectionData.name : "Quality & Safety Research"}
+                  </h1>
 
-              <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed">
-                We invest in scientific research and laboratory testing to
-                monitor:
-              </p>
+                  <div className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed">
+                    {sectionData ? (
+                      <div dangerouslySetInnerHTML={{ __html: sectionData.details }} />
+                    ) : (
+                      <>
+                        <p>
+                          We invest in scientific research and laboratory testing to
+                          monitor:
+                        </p>
 
-              <ul className="list-disc list-inside text-gray-100 text-sm md:text-lg leading-relaxed mt-2 pl-6 md:pl-8 space-y-2">
-                <li>Pesticide residues</li>
-                <li>Heavy metals</li>
-                <li>Microbiology (pathogens, yeasts, and moulds)</li>
-                <li>Pyrrolizidine alkaloids (PAs)</li>
-                <li>Polycyclic aromatic hydrocarbons (PAHs)</li>
-                <li>Moisture control and stability</li>
-              </ul>
+                        <ul className="list-disc list-inside text-gray-100 text-sm md:text-lg leading-relaxed mt-2 pl-6 md:pl-8 space-y-2">
+                          <li>Pesticide residues</li>
+                          <li>Heavy metals</li>
+                          <li>Microbiology (pathogens, yeasts, and moulds)</li>
+                          <li>Pyrrolizidine alkaloids (PAs)</li>
+                          <li>Polycyclic aromatic hydrocarbons (PAHs)</li>
+                          <li>Moisture control and stability</li>
+                        </ul>
 
-              <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
-                This ensures that all our products meet international standards
-                and continue to evolve with changing regulations.
-              </p>
+                        <p className="mt-4">
+                          This ensures that all our products meet international standards
+                          and continue to evolve with changing regulations.
+                        </p>
+                      </>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

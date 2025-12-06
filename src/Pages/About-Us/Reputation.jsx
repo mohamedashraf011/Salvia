@@ -6,15 +6,14 @@ import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
 import ReputationImg from "../../assets/images/reputation.png";
 import leavesRight from "../../assets/images/tree.png";
-import { DOMAIN } from "../../utils/Domain";
+import { fetchAboutSections } from "../../api/about";
+import Loader from "../../Components/Loader";
 
 const Reputation = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [sectionData, setSectionData] = useState({
-    name: "Our Reputation",
-    details: "With years of experience in the field, Salvia Naturals has built a reputation for professionalism, transparency, and excellence. We are proud to serve clients across the globe in the food, beverage, health, and wellness industries, offering them natural herbs that meet their specific requirements."
-  });
+  const [sectionData, setSectionData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,16 +21,16 @@ const Reputation = () => {
     
     const fetchSectionData = async () => {
       try {
-        const response = await fetch(`${DOMAIN}/api/about-us/sections`);
-        const data = await response.json();
+        setLoading(true);
+        const data = await fetchAboutSections();
         // Try to find a matching section, fallback to default
         const section = data.sections.find(s => s.name.toLowerCase().includes("reputation")) || 
                        data.sections.find(s => s.name === "Our Values");
-        if (section) {
-          setSectionData(section);
-        }
+        setSectionData(section);
+        setError(false);
       } catch (error) {
         console.error("Error fetching section data:", error);
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -82,13 +81,21 @@ const Reputation = () => {
               </Motion.div>
             </div>
 
-            <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500">
-              <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
-                <span className="block">{loading ? "Our Reputation" : sectionData.name}</span>
-              </h1>
-              <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
-                {loading ? "Loading..." : sectionData.details}
-              </p>
+            <div className="px-5 -translate-y-10 md:-translate-y-18 transition-all duration-500 min-h-[200px] flex flex-col justify-center">
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
+                    <span className="block">{!error && sectionData ? sectionData.name : "Our Reputation"}</span>
+                  </h1>
+                  <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mt-4">
+                    {!error && sectionData ? sectionData.details : (
+                      "With years of experience in the field, Salvia Naturals has built a reputation for professionalism, transparency, and excellence. We are proud to serve clients across the globe in the food, beverage, health, and wellness industries, offering them natural herbs that meet their specific requirements."
+                    )}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>

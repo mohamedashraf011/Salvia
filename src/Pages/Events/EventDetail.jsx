@@ -1,22 +1,59 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion as Motion } from "framer-motion";
 import { FaArrowDown, FaCalendar, FaMapMarkerAlt } from "react-icons/fa";
 import Sidebar from "../../Components/Sidebar";
 import Footer from "../../Components/Footer";
 import leavesRight from "../../assets/images/tree.png";
-import EventImage from "../../assets/images/EventDetail.png";
+import { DOMAIN } from "../../utils/Domain";
 
 const EventDetail = () => {
+  const { id } = useParams();
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchEvent = async () => {
+      try {
+        const response = await fetch(`${DOMAIN}/api/events/${id}`);
+        const data = await response.json();
+          // API returns the object directly or wrapped? User example showed direct object or { event: ... } wrapper?
+          // User request showed: {{remote_url}}/api/events/{id} -> object
+          // But I should be safe.
+        if (data._id) {
+             setEvent(data);
+        } else if (data.event) {
+             setEvent(data.event); 
+        } else {
+             setEvent(data); // Fallback assumption
+        }
+      } catch (error) {
+        console.error("Error fetching event:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (id) {
+       fetchEvent();
+    }
+  }, [id]);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleCloseSidebar = () => setIsSidebarOpen(false);
 
   const handleArrowClick = () => {
-    navigate("/event-information");
+    navigate(`/event-information/${id}`);
   };
+
+  if (loading) {
+    return <div className="text-white text-center mt-20">Loading...</div>;
+  }
+
+  if (!event) {
+     return <div className="text-white text-center mt-20">Event not found</div>;
+  }
 
   return (
     <section className="relative flex flex-col min-h-screen overflow-hidden bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white text-center">
@@ -32,16 +69,16 @@ const EventDetail = () => {
         <div className="flex flex-col lg:flex-row items-center justify-center w-full max-w-6xl mb-2 gap-6 lg:gap-12">
           <div className="flex flex-col justify-center items-center">
             <h1 className="text-3xl md:text-5xl font-extrabold mb-8 text-left">
-              Salvia at Cairo International Plants & Herbs Expo 2025
+              {event.title}
             </h1>
             <div className="text-lg md:text-xl mb-6 text-[#EDFFED]">
               <p className="mb-2 flex items-center justify-center lg:justify-start">
                 <FaCalendar className="mr-2" />
-                March 15-17, 2025
+                {new Date(event.date).toLocaleDateString()}
               </p>
               <p className="flex items-center justify-center lg:justify-start">
                 <FaMapMarkerAlt className="mr-2" />
-                Cairo International Convention Center, Egypt
+                {event.location}
               </p>
             </div>
 
@@ -55,10 +92,10 @@ const EventDetail = () => {
             </Motion.div>
           </div>
 
-          <div className="w-full lg:w-auto flex-shrink-0 mt-8 lg:mt-0">
+          <div className="w-[500px] lg:w-auto flex-shrink-0 mt-8 lg:mt-0">
             <img
-              src={EventImage}
-              alt="Salvia at Cairo Plants & Herbs Expo 2025"
+              src={event.image}
+              alt={event.title}
               className="max-w-md lg:max-w-2xl w-full h-auto rounded-lg shadow-lg"
             />
           </div>

@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from "react";
+import { fetchRnDSections } from "../../api/rnd";
 import { motion as Motion } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
+import Loader from "../../Components/Loader";
 import commitmentImage from "../../assets/images/Commitment.png";
 import leavesRight from "../../assets/images/tree.png";
 
 const Commitment = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [sectionData, setSectionData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchRnDSections();
+        const section = data.sections.find(s => s.name.includes("Commitment"));
+        setSectionData(section);
+      } catch (error) {
+        console.error("Failed to load Commitment section data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -45,21 +62,41 @@ const Commitment = () => {
               </Motion.div>
             </div>
 
-            <div className="px-5 -translate-y-10 md:-translate-y-20 transition-all duration-500">
-              <h1 className="text-4xl md:text-7xl font-extrabold leading-tight mb-6">
-                Commitment 
-                <br />to Progress
-              </h1>
-              <p className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mb-4">
-                By investing in R&D, we strengthen our ability to anticipate
-                customer needs, respond to industry challenges, and deliver
-                products that combine natural purity with scientific reliability.
-              </p>
-              <p>
-                At Salvia Naturals, R&D is not only about product development -
-                it is about building a future where natural herbs contribute to
-                global health, wellness, and sustainability.
-              </p>
+            <div className="px-5 -translate-y-10 md:-translate-y-20 transition-all duration-500 min-h-[200px] flex flex-col justify-center">
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  <h1 className="text-4xl md:text-7xl font-extrabold leading-tight mb-6">
+                    {sectionData ? (
+                      <span className="block">{sectionData.name}</span>
+                    ) : (
+                      <>
+                        Commitment 
+                        <br />to Progress
+                      </>
+                    )}
+                  </h1>
+                  <div className="max-w-2xl text-sm md:text-lg text-gray-100 leading-relaxed mb-4">
+                    {sectionData ? (
+                      <div dangerouslySetInnerHTML={{ __html: sectionData.details }} />
+                    ) : (
+                      <>
+                        <p className="mb-4">
+                          By investing in R&D, we strengthen our ability to anticipate
+                          customer needs, respond to industry challenges, and deliver
+                          products that combine natural purity with scientific reliability.
+                        </p>
+                        <p>
+                          At Salvia Naturals, R&D is not only about product development -
+                          it is about building a future where natural herbs contribute to
+                          global health, wellness, and sustainability.
+                        </p>
+                      </>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

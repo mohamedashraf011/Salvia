@@ -48,7 +48,7 @@ const OurQuality = () => {
         }
 
         // Fetch sections
-        const sectionsResponse = await axios.get('http://localhost:4005/api/our-quality-commitment/sections');
+        const sectionsResponse = await axios.get(`${DOMAIN}/api/our-quality-commitment/sections`);
         if (sectionsResponse.data.sections && sectionsResponse.data.sections.length > 0) {
           setSections(sectionsResponse.data.sections);
         } else {

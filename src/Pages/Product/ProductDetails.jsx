@@ -1,18 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
 import Footer from "../../Components/Footer";
 import Sidebar from "../../Components/Sidebar";
+import { DOMAIN } from "../../utils/Domain";
 
 function ProductDetails() {
-  const location = useLocation();
+  const { id } = useParams();
   const navigate = useNavigate();
-  const product = location.state;
-
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`${DOMAIN}/api/products/${id}`);
+        const data = await response.json();
+        if (data.product) {
+          setProduct(data.product);
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (id) {
+      fetchProduct();
+    }
+  }, [id]);
+
   const toggleSidebar = () => {
-    console.log("Toggle clicked! State will be:", !isSidebarOpen);
     setIsSidebarOpen(!isSidebarOpen);
   };
 
@@ -24,6 +43,14 @@ function ProductDetails() {
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-[#4E6347] to-[#9F9F9D] text-white text-xl">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -47,22 +74,22 @@ function ProductDetails() {
         <div className="flex flex-col lg:flex-row justify-between items-center px-8 lg:px-36 pt-12">
           <div className="text-white w-full lg:w-1/2 space-y-5">
             <h1 className="text-4xl lg:text-5xl font-bold uppercase">
-              {product.title}
+              {product.name}
             </h1>
-            <ul className="space-y-2 text-lg leading-relaxed list-disc list-inside">
-              {product.details?.map((item, index) => (
-                <li key={index}>
-                  <strong>{item.label}:</strong> {item.value}
-                </li>
-              ))}
-            </ul>
+            <h2 className="text-2xl font-semibold opacity-90">
+              {product.shortDescription}
+            </h2>
+            <div className="text-lg leading-relaxed space-y-4">
+              <p>{product.description}</p>
+              <p><strong>Category:</strong> {product.category}</p>
+            </div>
           </div>
 
           <div className="w-full lg:w-1/2 flex flex-col items-center space-y-6">
             <div className="bg-white rounded-2xl shadow-lg p-5 w-[380px]">
               <img
                 src={product.image}
-                alt={product.title}
+                alt={product.name}
                 className="w-full h-[250px] object-contain rounded-xl"
               />
             </div>
@@ -70,7 +97,7 @@ function ProductDetails() {
             <div className="flex gap-4">
               <button
                 onClick={() =>
-                  (window.location.href = `mailto:?subject=${product.title}&body=Check this product: ${window.location.href}`)
+                  (window.location.href = `mailto:?subject=${product.name}&body=Check this product: ${window.location.href}`)
                 }
                 className="flex items-center gap-2 bg-[#4E6347] text-white px-4 py-2 rounded-xl hover:bg-white hover:text-[#4E6347] transition cursor-pointer"
               >
