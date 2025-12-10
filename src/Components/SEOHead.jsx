@@ -16,7 +16,7 @@ const SEOHead = ({
   schema,
   noIndex = false,
 }) => {
-  const siteUrl = 'https://salvia.com'; // Update with actual domain
+  const siteUrl = 'https://www.salvianaturals.com'; // Update with actual domain
   const fullCanonicalUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
   const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 

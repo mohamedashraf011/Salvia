@@ -8,8 +8,8 @@ export const getOrganizationSchema = () => ({
   "@type": "Organization",
   "name": "Salvia Naturals",
   "alternateName": "Salvia Natural",
-  "url": "https://salvia.com",
-  "logo": "https://salvia.com/icon.png",
+  "url": "https://www.salvianaturals.com",
+  "logo": "https://www.salvianaturals.com/icon.png",
   "description": "Leading Egyptian exporter of premium dried herbs, botanicals, seeds, dried leaves, and dried flowers from the fertile Nile Valley.",
   "foundingLocation": {
     "@type": "Place",
@@ -37,10 +37,10 @@ export const getWebsiteSchema = () => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Salvia Naturals",
-  "url": "https://salvia.com",
+  "url": "https://www.salvianaturals.com",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://salvia.com/product?search={search_term_string}",
+    "target": "https://www.salvianaturals.com/product?search={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 });
@@ -50,8 +50,8 @@ export const getLocalBusinessSchema = (contactInfo = {}) => ({
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Salvia Naturals",
-  "image": "https://salvia.com/icon.png",
-  "url": "https://salvia.com",
+  "image": "https://www.salvianaturals.com/icon.png",
+  "url": "https://www.salvianaturals.com",
   "telephone": contactInfo.phone || "",
   "email": contactInfo.email || "",
   "address": {
@@ -93,7 +93,7 @@ export const getBreadcrumbSchema = (items) => ({
     "@type": "ListItem",
     "position": index + 1,
     "name": item.name,
-    "item": `https://salvia.com${item.path}`
+    "item": `https://www.salvianaturals.com${item.path}`
   }))
 });
 
